@@ -1,0 +1,141 @@
+# better-vim-experience: Little tips and tricks for VIM
+
+## Table of Contents
+
+- **[General Tips And Tricks](#general-tips-and-tricks)**
+* **[Programming in Python](#programming-in-python)**
+
+## General Tips And Tricks
+
+---
+### Display the main help file in a new tab
+
+```
+   " DISPLAY HELP IN NEW TAB
+   nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
+```
+This is useful to maximize the help window and read more easily. You can quickly switch back to the next tab with the keystrokes `gt` (especially useful if you don't have any other tab opened). Simply do `:q` on the help tab and you're back to work! 
+
+
+---
+### Remove all whitespace at the end of every line in the file
+
+This also works for lines that only contain whitespace. It keeps the line in place but remove the extra space(s) or tab(s) that might have been left by accident.
+```
+   noremap <F5> :%s/\s\+$//<CR>:echo 'all whitespace removed.'<CR>
+```
+
+
+---
+### Access command mode more easily by swapping colon with semi-colon
+
+If you (almost) never use the key `;`, you can swap it with `:` to get to the command line more easily. You can still continue to use `;` by typing `:`.
+```
+   nnoremap ; :
+   nnoremap : ;
+```
+
+
+## Programming in Python
+
+---
+### Quick and effective way to use PDB (Python Debugger)
+
+I have found that using **pdb.set_trace()** is quite useful to debug a program and I now use the following mappings in **~/.vimrc** to facilitate the work.
+
+
+---
+#### Adding the debugging statement
+```
+   " ADD PDB.SET_TRACE() TO ALLOW FOR DEBUGGING
+   nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1import pdb; pdb.set_trace\(\)\r\1\2/<CR>
+```
+This adds a new line with the content `import pdb; pdb.set_trace()` above the current line with the same amount of leading whitespace as the line where the cursor is located. This is how the following snippet of code is affected (the cursor should be located on the line `string_input = input()`):
+```
+   def main_execution() -> str:
+       string_input = input()
+       return compare_scores(string_input)
+```
+It becomes:
+```
+   def main_execution() -> str:
+       import pdb; pdb.set_trace()
+       string_input = input()
+       return compare_scores(string_input)
+```
+
+
+---
+#### Commenting all the lines where the debugging statement is found
+```
+   " COMMENT ALL LINES WHERE 'PDB.SET_TRACE()' IS FOUND
+   nnoremap <F8> :%s/\(^.*\)\(import pdb; pdb.set_trace()\)\(.*$\)/\1# \2\3/g<CR>
+```
+This works wherever you are in the file and leaves you on the line where the last occurrence has been changed. The only change that is being made is to add `# ` right before `import pdb; pdb.set_trace()`, keeping the indentation intact.
+
+
+---
+#### Uncommenting all the lines where the debugging statement is found 
+```
+   " UNCOMMENT ALL LINES WHERE 'PDB.SET_TRACE()' IS FOUND
+   nnoremap <F9> :%s/\(^.*\)\(# \)\(import pdb; pdb.set_trace()\)\(.*$\)/\1\3\4/g<CR>
+```
+Working just like for commenting, this mapping removes only the `# ` part before the `import` statement and brings you to the last occurrence where a change has been made.
+
+
+---
+#### Removing all traces of pdb.set_trace()
+```
+   " REMOVE ALL LINES WHERE THE 'PDB.SET_TRACE()' DEBUGGING STATEMENT IS FOUND
+   nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR>
+```
+Like with commenting and uncommenting, you are left at the last occurrence where a change has been made... now with a file as clean as before debugging!
+
+
+---
+### Simple abbreviations for the main Python keywords
+```
+   " Abbreviations
+   ab ass assert
+   ab bk break
+   ab cl class
+   ab con continue
+   ab ex except
+   ab fi finally
+   ab fro for
+   ab glo global
+   ab nlo nonlocal
+   ab ret return
+   ab teh the
+   ab wh while
+   ab wi with
+   ab yi yield
+```
+
+
+---
+### Display text in red over column limit
+
+The function can easily be toggled (like shown on the last line). Here, it is set to go red from position 81 and above.
+```
+   let s:activatedh = 0
+   function! ToggleH()
+       if s:activatedh == 0
+           let s:activatedh = 1
+           highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+           match OverLength /\%81v.\+/
+       else
+           let s:activatedh = 0
+           match none
+       endif
+   endfunction
+   nnoremap <F3> :call ToggleH()<CR>
+```
+
+
+---
+### Display python help for word under cursor
+```
+   nnoremap <buffer> <F12> :<C-u>execute "!pydoc3 " . expand("<cword>")<CR>
+```
+This opens a new window where you can move just like in VIM with a complete definition of the keyword you were looking for. When closing the help window, you are back exactly to where you left off.
