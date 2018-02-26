@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - **[General Tips And Tricks](#general-tips-and-tricks)**
-* **[Programming in Python](#programming-in-python)**
+- **[Programming in Python](#programming-in-python)**
 
 ## General Tips And Tricks
 
@@ -37,6 +37,17 @@ If you (almost) never use the key `;`, you can swap it with `:` to get to the co
    nnoremap : ;
 ```
 
+---
+### Add newline without leaving normal mode and stay on current line 
+```
+   nnoremap <C-J> o<Esc>
+   nnoremap <C-K> O<Esc>
+```
+
+### Completions with Ctrl+x (eXpand)
+- `Ctrl + x  Ctrl + p` will find a word and suggest a list to complete it. If there's only a match, it is automatically inserted. 
+- `Ctrl + x  Ctrl + l` will complete a whole line automatically if there's only one match, else it will suggest a list.
+
 
 ## Programming in Python
 
@@ -50,7 +61,7 @@ I have found that using **pdb.set_trace()** is quite useful to debug a program a
 #### Adding the debugging statement
 ```
    " ADD PDB.SET_TRACE() TO ALLOW FOR DEBUGGING
-   nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1import pdb; pdb.set_trace\(\)\r\1\2/<CR>
+   nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1import pdb; pdb.set_trace\(\)\r\1\2/<CR>:echo 'pdb debugging: ADDED'<CR>
 ```
 This adds a new line with the content `import pdb; pdb.set_trace()` above the current line with the same amount of leading whitespace as the line where the cursor is located. This is how the following snippet of code is affected (the cursor should be located on the line `string_input = input()`):
 ```
@@ -71,27 +82,27 @@ It then becomes:
 #### Commenting all the lines where the debugging statement is found
 ```
    " COMMENT ALL LINES WHERE 'PDB.SET_TRACE()' IS FOUND
-   nnoremap <F8> :%s/\(^.*\)\(import pdb; pdb.set_trace()\)\(.*$\)/\1# \2\3/g<CR>
+   nnoremap <F8> :%s/\(^.*\)\(import pdb; pdb.set_trace()\)\(.*$\)/\1# \2\3/ge<CR>:echo 'pdb debugging: COMMENTED'<CR>
 ```
-This works wherever you are in the file and leaves you on the line where the last occurrence has been changed. The only change that is being made is to add `# ` right before `import pdb; pdb.set_trace()`, keeping the indentation intact.
+This works wherever you are in the file and leaves you on the line where the command is executed. The only change that is being made is to add `# ` right before `import pdb; pdb.set_trace()`, keeping the indentation intact.
 
 
 ---
 #### Uncommenting all the lines where the debugging statement is found 
 ```
    " UNCOMMENT ALL LINES WHERE 'PDB.SET_TRACE()' IS FOUND
-   nnoremap <F9> :%s/\(^.*\)\(# \)\(import pdb; pdb.set_trace()\)\(.*$\)/\1\3\4/g<CR>
+   nnoremap <F9> :%s/\(^.*\)\(# \)\(import pdb; pdb.set_trace()\)\(.*$\)/\1\3\4/ge<CR>:echo 'pdb debugging: UNCOMMENTED'<CR>
 ```
-Working just like for commenting, this mapping removes only the `# ` part before the `import` statement and brings you to the last occurrence where a change has been made.
+Working just like for commenting, this mapping removes only the `# ` part before the `import` statement and keeps you where the command is being executed.
 
 
 ---
 #### Removing all traces of pdb.set_trace()
 ```
    " REMOVE ALL LINES WHERE THE 'PDB.SET_TRACE()' DEBUGGING STATEMENT IS FOUND
-   nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR>
+   nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR>:echo 'pdb debugging: REMOVED'<CR>
 ```
-Like with commenting and uncommenting, you are left at the last occurrence where a change has been made... now with a file as clean as before debugging!
+Like with commenting and uncommenting, you are left at the same location in the current file... now with a code hopefully at least as good as when you started debugging!
 
 
 ---
@@ -114,6 +125,12 @@ Like with commenting and uncommenting, you are left at the last occurrence where
    ab yi yield
 ```
 
+
+### Search for previous/next function
+```
+   nnoremap <F2> ?def <CR>
+   nnoremap <F3> /def <CR>
+```
 
 ---
 ### Display text in red over column limit
