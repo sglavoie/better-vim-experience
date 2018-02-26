@@ -82,7 +82,7 @@ It then becomes:
 #### Commenting all the lines where the debugging statement is found
 ```
    " COMMENT ALL LINES WHERE 'PDB.SET_TRACE()' IS FOUND
-   nnoremap <F8> :%s/\(^.*\)\(import pdb; pdb.set_trace()\)\(.*$\)/\1# \2\3/ge<CR>:echo 'pdb debugging: COMMENTED'<CR>
+   nnoremap <F8> :%s/\(^.*\)\(import pdb; pdb.set_trace()\)\(.*$\)/\1# \2\3/ge<CR><C-O>:echo 'pdb debugging: COMMENTED'<CR>
 ```
 This works wherever you are in the file and leaves you on the line where the command is executed. The only change that is being made is to add `# ` right before `import pdb; pdb.set_trace()`, keeping the indentation intact.
 
@@ -91,7 +91,7 @@ This works wherever you are in the file and leaves you on the line where the com
 #### Uncommenting all the lines where the debugging statement is found 
 ```
    " UNCOMMENT ALL LINES WHERE 'PDB.SET_TRACE()' IS FOUND
-   nnoremap <F9> :%s/\(^.*\)\(# \)\(import pdb; pdb.set_trace()\)\(.*$\)/\1\3\4/ge<CR>:echo 'pdb debugging: UNCOMMENTED'<CR>
+   nnoremap <F9> :%s/\(^.*\)\(# \)\(import pdb; pdb.set_trace()\)\(.*$\)/\1\3\4/ge<CR><C-O>:echo 'pdb debugging: UNCOMMENTED'<CR>
 ```
 Working just like for commenting, this mapping removes only the `# ` part before the `import` statement and keeps you where the command is being executed.
 
@@ -100,7 +100,7 @@ Working just like for commenting, this mapping removes only the `# ` part before
 #### Removing all traces of pdb.set_trace()
 ```
    " REMOVE ALL LINES WHERE THE 'PDB.SET_TRACE()' DEBUGGING STATEMENT IS FOUND
-   nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR>:echo 'pdb debugging: REMOVED'<CR>
+   nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR><C-O>:echo 'pdb debugging: REMOVED'<CR>
 ```
 Like with commenting and uncommenting, you are left at the same location in the current file... now with a code hopefully at least as good as when you started debugging!
 
