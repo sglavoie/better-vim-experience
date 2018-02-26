@@ -7,6 +7,8 @@
 
 ## General Tips And Tricks
 
+This is obviously far from being an exhaustive list, but those are some tips and tricks that I find really useful on a daily basis.
+
 ---
 ### Display the main help file in a new tab
 
@@ -56,7 +58,7 @@ This adds a new line with the content `import pdb; pdb.set_trace()` above the cu
        string_input = input()
        return compare_scores(string_input)
 ```
-It becomes:
+It then becomes:
 ```
    def main_execution() -> str:
        import pdb; pdb.set_trace()
@@ -134,7 +136,7 @@ The function can easily be toggled (like shown on the last line). Here, it is se
 
 
 ---
-### Display python help for word under cursor
+### Display Python help for word under cursor
 ```
    nnoremap <buffer> <F12> :<C-u>execute "!pydoc3 " . expand("<cword>")<CR>
 ```
