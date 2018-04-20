@@ -15,6 +15,8 @@
     - [Commenting all the lines where the debugging statement is found](#commenting-all-the-lines-where-the-debugging-statement-is-found)
     - [Uncommenting all the lines where the debugging statement is found](#uncommenting-all-the-lines-where-the-debugging-statement-is-found)
     - [Removing all traces of pdb.set_trace()](#removing-all-traces-of-pdbset_trace)
+  - [Add TODO comment to the end of the line and place into insert mode](#add-todo-comment-to-the-end-of-the-line-and-place-into-insert-mode)
+  - [Find next TODO comment in current file](#find-next-todo-comment-in-current-file)
   - [Simple abbreviations for the main Python keywords](#simple-abbreviations-for-the-main-python-keywords)
   - [Search for previous/next function](#search-for-previousnext-function)
   - [Display text in red over column limit](#display-text-in-red-over-column-limit)
@@ -118,6 +120,20 @@ Working just like for commenting, this mapping removes only the `# ` part before
    nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR><C-O>:echo 'pdb debugging: REMOVED'<CR>
 ```
 Like with commenting and uncommenting, you are left at the same location in the current file... now with a code hopefully at least as good as when you started debugging!
+
+
+---
+### Add TODO comment to the end of the line and place into insert mode
+```vim
+    map <leader>t <Esc>A  # TODO: <Esc>A
+```
+
+
+---
+### Find next TODO comment in current file
+```vim
+    map <leader>T <Esc>/\C# TODO: <CR>
+```
 
 
 ---
