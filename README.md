@@ -14,7 +14,7 @@
     - [Adding the debugging statement](#adding-the-debugging-statement)
     - [Commenting all the lines where the debugging statement is found](#commenting-all-the-lines-where-the-debugging-statement-is-found)
     - [Uncommenting all the lines where the debugging statement is found](#uncommenting-all-the-lines-where-the-debugging-statement-is-found)
-    - [Removing all traces of pdb.set_trace()](#removing-all-traces-of-pdb.set_trace)
+    - [Removing all traces of pdb.set_trace()](#removing-all-traces-of-pdbset_trace)
   - [Simple abbreviations for the main Python keywords](#simple-abbreviations-for-the-main-python-keywords)
   - [Search for previous/next function](#search-for-previousnext-function)
   - [Display text in red over column limit](#display-text-in-red-over-column-limit)
