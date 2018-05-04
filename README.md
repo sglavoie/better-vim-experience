@@ -1,4 +1,4 @@
-# better-vim-experience: Little tips and tricks for VIM
+# Tips and tricks for [Vim](https://github.com/vim/vim) / [Neovim](https://github.com/neovim/neovim)
 
 ## Table of Contents
 
@@ -10,11 +10,12 @@
   - [Completions with Ctrl+x (eXpand)](#completions-with-ctrlx-expand)
 
 - **[Programming in Python](#programming-in-python)**
+  - [Navigate to definitions and tags](#navigate-to-definitions-and-tags)
   - [Quick and effective way to use PDB (Python Debugger)](#quick-and-effective-way-to-use-pdb-python-debugger)
-    - [Adding the debugging statement](#adding-the-debugging-statement)
-    - [Commenting all the lines where the debugging statement is found](#commenting-all-the-lines-where-the-debugging-statement-is-found)
-    - [Uncommenting all the lines where the debugging statement is found](#uncommenting-all-the-lines-where-the-debugging-statement-is-found)
-    - [Removing all traces of pdb.set_trace()](#removing-all-traces-of-pdbset_trace)
+      - [Adding the debugging statement](#adding-the-debugging-statement)
+      - [Commenting all the lines where the debugging statement is found](#commenting-all-the-lines-where-the-debugging-statement-is-found)
+      - [Uncommenting all the lines where the debugging statement is found](#uncommenting-all-the-lines-where-the-debugging-statement-is-found)
+      - [Removing all traces of pdb.set_trace()](#removing-all-traces-of-pdbset_trace)
   - [Add TODO comment to the end of the line and place into insert mode](#add-todo-comment-to-the-end-of-the-line-and-place-into-insert-mode)
   - [Find next TODO comment in current file](#find-next-todo-comment-in-current-file)
   - [Simple abbreviations for the main Python keywords](#simple-abbreviations-for-the-main-python-keywords)
@@ -69,9 +70,44 @@ If you (almost) never use the key `;`, you can swap it with `:` to get to the co
 ## Programming in Python
 
 ---
+### Navigate to definitions and tags
+
+#### Navigate inside the current file
+There is a command `gd` that stands for "Goto local Declaration". It is quite useful when looking for a variable inside the current file as it allows to jump to where it is declared when the variable is under the cursor. Using that command, you can also find where a function is declared and it will find the first occurrence in the current function. If looking for the first occurrence in the file, `gD`  ("Goto global Declaration") will do the trick. You can jump back and forth to where you were with the commands `Ctrl + O` (older position) and `Ctrl + I` (newer position) in normal mode.
+
+#### Navigate inside all files within the current project
+To be able to jump between files and go back to the origin of a declaration when it is imported in the current module, generating tags comes in very handy as it allows you to use the command `Ctrl + ]` to jump to a tag, just like when using the help pages in Vim.
+
+To make this work, we can conveniently use `ctags`. You can put the following command in your configuration file to be able to generate the necessary tags inside Vim by typing `MakeTags` in command mode:
+```vim
+command! MakeTags !ctags -R .
+```
+
+This will make it easy to remember how to do it. After that, open an existing project in its root directory and use this newly created `MakeTags` command to generate the tags. This will create a file named `tags` in the current working directory. Now, you will be able to open any file inside your project and jump to all the available declarations with `Ctrl + ]`.
+
+If you go to a tag that leads you a few declarations away in one file or another, you can come back with `Ctrl + T`. Here is a clear explanation from Vim's help:
+```
+The most obvious way to use this is while browsing through the call graph of
+a program.  Consider the following call graph:
+
+	main  --->  FuncA  --->  FuncC
+	      --->  FuncB
+
+(Explanation: main calls FuncA and FuncB; FuncA calls FuncC).
+You can get from main to FuncA by using CTRL-] on the call to FuncA.  Then
+you can CTRL-] to get to FuncC.  If you now want to go back to main you can
+use CTRL-T twice.  Then you can CTRL-] to FuncB.
+```
+
+To keep those tags useful when you update your project, you can map a sequence that saves the file you are working on and then regenerates the tags automatically. Here is an example:
+```vim
+nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
+```
+
+---
 ### Quick and effective way to use PDB (Python Debugger)
 
-I have found that using **pdb.set_trace()** is quite useful to debug a program and I now use the following mappings in **~/.vimrc** to facilitate the work.
+I have found that using **pdb.set_trace()** is quite useful to debug a program and I now use the following mappings in Vim's configuration file to facilitate the work.
 
 
 ---
@@ -119,7 +155,7 @@ Working just like for commenting, this mapping removes only the `# ` part before
    " REMOVE ALL LINES WHERE THE 'PDB.SET_TRACE()' DEBUGGING STATEMENT IS FOUND
    nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR><C-O>:echo 'pdb debugging: REMOVED'<CR>
 ```
-Like with commenting and uncommenting, you are left at the same location in the current file... now with a code hopefully at least as good as when you started debugging!
+Like with commenting and uncommenting, you are left at the same location in the current file... Now with a code hopefully at least as good as when you started debugging!
 
 
 ---
