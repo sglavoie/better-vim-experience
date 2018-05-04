@@ -119,6 +119,11 @@ endif
 
 """""""""""""""""""""""""""""""""""""""" [ PLUGINS SETTINGS ]
 
+""""" [ COMFORTABLE-MOTION ]
+let g:comfortable_motion_friction = 200  " default = 80
+let g:comfortable_motion_air_drag = 3.0  " default = 2.0
+""" [ / COMFORTABLE-MOTION ]
+
 """"" [ GOYO ]
 nnoremap <F11> :Goyo<CR>
 """ [ / GOYO ]
@@ -133,7 +138,7 @@ autocmd! User GoyoLeave Limelight!
 """ [ / LIMELIGHT ]
 
 """"" [ NEOMAKE ]
-" NEOMAKE : PYTHON WITH PYLINT
+" neomake : python with pylint
 call neomake#configure#automake('w')
 let g:neomake_python_enabled_makers = ['pylint']
 """ [ / NEOMAKE ]
@@ -158,11 +163,6 @@ let g:EasyMotion_smartcase = 1
 """"" [ VIM-MARKDOWN-PREVIEW ]
 let vim_markdown_preview_github=1
 """ [ / VIM-MARKDOWN-PREVIEW ]
-
-""""" [ COMFORTABLE-MOTION ]
-let g:comfortable_motion_friction = 200  " default = 80
-let g:comfortable_motion_air_drag = 3.0  " default = 2.0
-""" [ / COMFORTABLE-MOTION ]
 
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
 
@@ -207,6 +207,7 @@ nnoremap <leader>k O<Esc>
 " save file and regenerate ctags
 nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
 
+
 """"" [ FUNCTIONS ]
 
 " remove all whitespace at the end of every line in the file.
@@ -231,12 +232,14 @@ nnoremap <Char-171> :call ToggleH()<CR>
 
 """""""""""""""""""""""""""""" [ / MAPPINGS ]
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               CUSTOM COMMANDS                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 'MakeTags' command to generate ctags in project
 command! MakeTags !ctags -R .
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                GIT SECTION                                   "
@@ -250,6 +253,7 @@ nnoremap <leader>s :Gstatus<CR>
 
 " git diff when appropriate
 nnoremap <leader>D :Gdiff<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              PYTHONIC SECTION                                "
@@ -289,6 +293,7 @@ ab yi yield
 " search for previous/next function
 nnoremap <F2> ?def <CR>
 nnoremap <F3> /def <CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              DEBUGGING MAPPINGS                              "
