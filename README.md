@@ -114,7 +114,7 @@ I have found that using **pdb.set_trace()** is quite useful to debug a program a
 #### Adding the debugging statement
 ```vim
    " ADD PDB.SET_TRACE() TO ALLOW FOR DEBUGGING
-   nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1import pdb; pdb.set_trace\(\)\r\1\2/<CR>:echo 'pdb debugging: ADDED'<CR>
+   nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1import pdb; pdb.set_trace\(\)\r\1\2/<CR>:echo 'pdb debugging: ADDED'<CR>:let @/ = ""<CR>
 ```
 This adds a new line with the content `import pdb; pdb.set_trace()` above the current line with the same amount of leading whitespace as the line where the cursor is located. This is how the following snippet of code is affected (the cursor should be located on the line `string_input = input()`):
 ```python
