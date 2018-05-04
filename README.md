@@ -116,18 +116,18 @@ I have found that using **pdb.set_trace()** is quite useful to debug a program a
    " ADD PDB.SET_TRACE() TO ALLOW FOR DEBUGGING
    nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1import pdb; pdb.set_trace\(\)\r\1\2/<CR>:echo 'pdb debugging: ADDED'<CR>:let @/ = ""<CR>
 ```
-This adds a new line with the content `import pdb; pdb.set_trace()` above the current line with the same amount of leading whitespace as the line where the cursor is located. This is how the following snippet of code is affected (the cursor should be located on the line `string_input = input()`):
+This adds a new line with the content `import pdb; pdb.set_trace()` above the current line with the same amount of leading whitespace as the line where the cursor is located. This is how the following snippet of code is affected (the cursor should be located on line `2`):
 ```python
-   def main_execution() -> str:
-       string_input = input()
-       return compare_scores(string_input)
+1  def main_execution() -> str:
+2      string_input = input()
+3      return compare_scores(string_input)
 ```
 It then becomes:
 ```python
-   def main_execution() -> str:
-       import pdb; pdb.set_trace()
-       string_input = input()
-       return compare_scores(string_input)
+1  def main_execution() -> str:
+2      import pdb; pdb.set_trace()
+3      string_input = input()
+4      return compare_scores(string_input)
 ```
 
 
