@@ -9,7 +9,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " async linting
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
+
+" Autocompletion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " design & appearance
 Plug 'NLKNguyen/papercolor-theme'
@@ -119,10 +122,21 @@ endif
 
 """""""""""""""""""""""""""""""""""""""" [ PLUGINS SETTINGS ]
 
+""""" [ ALE ]
+let g:ale_linters = {
+            \   'python': ['pycodestyle'],
+            \}
+let g:ale_completion_enabled = 1
+""" [ / ALE ]
+
 """"" [ COMFORTABLE-MOTION ]
 let g:comfortable_motion_friction = 200  " default = 80
 let g:comfortable_motion_air_drag = 3.0  " default = 2.0
 """ [ / COMFORTABLE-MOTION ]
+
+""""" [ DEOPLETE ]
+let g:deoplete#enable_at_startup = 1
+""" [ / DEOPLETE ]
 
 """"" [ GOYO ]
 nnoremap <F11> :Goyo<CR>
@@ -137,15 +151,10 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 """ [ / LIMELIGHT ]
 
-""""" [ NEOMAKE ]
-" neomake : python with pylint
-call neomake#configure#automake('w')
-let g:neomake_python_enabled_makers = ['pylint']
-""" [ / NEOMAKE ]
-
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='onedark'
+let g:airline#extensions#ale#enabled = 1
 """ [ / VIM-AIRLINE ]
 
 """"" [ VIM-EASYMOTION ]
@@ -167,6 +176,10 @@ let vim_markdown_preview_github=1
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
 
 """""""""""""""""""""""""""""""""""""""" [ MAPPINGS ]
+
+" Jump to next error in ALE (with É=previous and é=next)
+map <Char-201> <Plug>(ale_previous_wrap)
+map <Char-233> <Plug>(ale_next_wrap)
 
 " display help in new tab
 nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
