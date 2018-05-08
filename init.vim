@@ -36,6 +36,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 call plug#end()
 
@@ -77,7 +78,7 @@ set spellfile=~/.config/nvim/spell/en.utf-8.add
 set splitbelow  " put new window below current one when splitting
 set splitright  " put new window to the right of the current one when splitting
 set tabstop=4  " ideally, same value as 'shiftwidth'
-set textwidth=79  " number of characters in a line
+set textwidth=0  " number of characters in a line (0 = no limit)
 
 " use the system clipboard by default
 set clipboard=unnamedplus
@@ -95,10 +96,14 @@ set ignorecase
 " always displays status line
 set laststatus=2
 
-" allows to search recursively for files with pattern matching (:find)
-set path+=**
+" allows to search recursively for files with pattern matching (e.g. :find)
+set path=$PWD/**
 
-" show command in bottom bar
+" ignores certain files/directories in current path
+set wildignore+=*.pyc,*.git*,*.db,*__pycache__*,*.png,*.jpg,*.jpeg,*.pdf
+set wildignore+=*.svg,*.xcf
+
+" show normal command being typed in bottom right corner
 set showcmd
 
 " visual autocomplete for command menu
@@ -158,11 +163,11 @@ let g:airline#extensions#ale#enabled = 1
 """ [ / VIM-AIRLINE ]
 
 """"" [ VIM-EASYMOTION ]
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_do_mapping = 1 " Disable default mappings
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{char}{label}`
-nmap s <Plug>(easymotion-overwin-f2)
+nmap ç <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -177,12 +182,27 @@ let vim_markdown_preview_github=1
 
 """""""""""""""""""""""""""""""""""""""" [ MAPPINGS ]
 
-" Jump to next error in ALE (with É=previous and é=next)
-map <Char-201> <Plug>(ale_previous_wrap)
-map <Char-233> <Plug>(ale_next_wrap)
+" jump to next error in ALE (with ª=previous and º=next)
+map <Char-170> <Plug>(ale_previous_wrap)
+map <Char-186> <Plug>(ale_next_wrap)
+
+" find word under cursor in all files in current path
+nnoremap <leader>a :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+" find a file in current path (works well with "set path+=**")
+nnoremap <leader>g :find<space>*
+
+" toggle nerdtree on/off
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" press F4 to toggle highlighting on/off, and show current value.
+:noremap <F4> :set hlsearch! hlsearch?<CR>
 
 " display help in new tab
 nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
+
+" open a buffer to edit Neovim configuration file
+nnoremap <leader>C :e ~/Dropbox/Programming/GitHub/better-vim-experience/init.vim<CR>
 
 " close buffer
 nnoremap <leader>q :q<CR>
@@ -198,12 +218,6 @@ nnoremap <leader>l :ls<CR>
 " shortcut to save a buffer
 nnoremap <leader>w :w!<CR>
 
-" toggle nerdtree on/off
-nnoremap <leader>n :NERDTreeToggle<CR>
-
-" press F4 to toggle highlighting on/off, and show current value.
-:noremap <F4> :set hlsearch! hlsearch?<CR>
-
 " move between windows
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -216,6 +230,12 @@ nnoremap <space> za
 " add newline without leaving normal mode and stay on current line
 nnoremap <leader>j o<Esc>
 nnoremap <leader>k O<Esc>
+
+" moves more easily with long lines that wrap
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " save file and regenerate ctags
 nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
@@ -238,8 +258,8 @@ function! ToggleH()
         match none
     endif
 endfunction
-" Mapping to character «
-nnoremap <Char-171> :call ToggleH()<CR>
+" Mapping to character ¬
+nnoremap <Char-172> :call ToggleH()<CR>
 
 """ [ / FUNCTIONS ]
 
@@ -265,7 +285,7 @@ set statusline+=%{fugitive#statusline()}
 nnoremap <leader>s :Gstatus<CR>
 
 " git diff when appropriate
-nnoremap <leader>D :Gdiff<CR>
+nnoremap <leader>d :Gdiff<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -323,4 +343,3 @@ nnoremap <F9> :%s/\(^.*\)\(# \)\(import pdb; pdb.set_trace()\)\(.*$\)/\1\3\4/ge<
 
 " remove all lines where the 'pdb' debugging statement is found
 nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR><C-O>:echo 'pdb debugging: REMOVED'<CR>
-
