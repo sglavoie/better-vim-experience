@@ -16,8 +16,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " design & appearance
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -143,19 +141,6 @@ let g:comfortable_motion_air_drag = 3.0  " default = 2.0
 let g:deoplete#enable_at_startup = 1
 """ [ / DEOPLETE ]
 
-""""" [ GOYO ]
-nnoremap <F11> :Goyo<CR>
-""" [ / GOYO ]
-
-""""" [ LIMELIGHT ]
-" Let search highlight be first priority in all dimmed text
-let g:limelight_priority = -1
-
-" activate/deactivate limelight when using/not using goyo
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-""" [ / LIMELIGHT ]
-
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='onedark'
@@ -204,8 +189,11 @@ nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
 " open a buffer to edit Neovim configuration file
 nnoremap <leader>C :e ~/Dropbox/Programming/GitHub/better-vim-experience/init.vim<CR>
 
-" close buffer
-nnoremap <leader>q :q<CR>
+" close active buffer in there are no pending changes to save
+nnoremap <leader>x :bd<CR>
+
+" close active buffer even if there are pending changes to save
+nnoremap <leader>X :bd!<CR>
 
 " reset edits made in current buffer
 nnoremap <leader>e :e!<CR>
@@ -217,6 +205,9 @@ nnoremap <leader>l :ls<CR>
 
 " shortcut to save a buffer
 nnoremap <leader>w :w!<CR>
+
+" close current window (closes Vim if there's only one window)
+nnoremap <leader>q :q<CR>
 
 " move between windows
 map <C-h> <C-w>h
