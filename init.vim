@@ -13,6 +13,7 @@ Plug 'w0rp/ale'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'davidhalter/jedi-vim'
 
 " design & appearance
 Plug 'NLKNguyen/papercolor-theme'
@@ -24,6 +25,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'JamshedVesuna/vim-markdown-preview'
 
 " moving/editing around
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
@@ -137,14 +139,29 @@ let g:comfortable_motion_friction = 200  " default = 80
 let g:comfortable_motion_air_drag = 3.0  " default = 2.0
 """ [ / COMFORTABLE-MOTION ]
 
+""""" [ CTRLP ]
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+""" [ / CTRLP ]
+
 """"" [ DEOPLETE ]
 let g:deoplete#enable_at_startup = 1
 """ [ / DEOPLETE ]
 
+""""" [ JEDI-VIM ]
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#popup_select_first = 0
+""" [ / JEDI-VIM ]
+
 """"" [ VIM-AIRLINE ]
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='onedark'
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#left_alt_sep = ' '
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_theme='onedark'
 """ [ / VIM-AIRLINE ]
 
 """"" [ VIM-EASYMOTION ]
@@ -161,6 +178,7 @@ let g:EasyMotion_smartcase = 1
 
 """"" [ VIM-MARKDOWN-PREVIEW ]
 let vim_markdown_preview_github=1
+let vim_markdown_preview_hotkey='<C-m>'
 """ [ / VIM-MARKDOWN-PREVIEW ]
 
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
@@ -175,10 +193,10 @@ map <Char-186> <Plug>(ale_next_wrap)
 nnoremap <leader>a :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 
 " find a file in current path (works well with "set path+=**")
-nnoremap <leader>g :find<space>*
+nnoremap <leader>G :find<space>*
 
 " toggle nerdtree on/off
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>N :NERDTreeToggle<CR>
 
 " press F4 to toggle highlighting on/off, and show current value.
 :noremap <F4> :set hlsearch! hlsearch?<CR>
@@ -187,7 +205,7 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
 
 " open a buffer to edit Neovim configuration file
-nnoremap <leader>C :e ~/Dropbox/Programming/GitHub/better-vim-experience/init.vim<CR>
+nnoremap <leader>C :e ~/.config/nvim/init.vim<CR>
 
 " close active buffer in there are no pending changes to save
 nnoremap <leader>x :bd<CR>
@@ -205,6 +223,9 @@ nnoremap <leader>l :ls<CR>
 
 " shortcut to save a buffer
 nnoremap <leader>w :w!<CR>
+
+" save file and regenerate ctags
+nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
 
 " close current window (closes Vim if there's only one window)
 nnoremap <leader>q :q<CR>
@@ -227,9 +248,6 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-
-" save file and regenerate ctags
-nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
 
 
 """"" [ FUNCTIONS ]
@@ -276,7 +294,7 @@ set statusline+=%{fugitive#statusline()}
 nnoremap <leader>s :Gstatus<CR>
 
 " git diff when appropriate
-nnoremap <leader>d :Gdiff<CR>
+nnoremap <leader>D :Gdiff<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
