@@ -1,7 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """                       NEOVIM CONFIGURATION FILE                          """
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""" [ PLUGINS ]
@@ -17,26 +15,28 @@ Plug 'davidhalter/jedi-vim'
 
 " design & appearance
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " language specific
-Plug 'plasticboy/vim-markdown'
 Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'plasticboy/vim-markdown'
 
 " moving/editing around
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'yuttie/comfortable-motion.vim'
 
 " useful features
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
 
 call plug#end()
 
@@ -45,19 +45,17 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""" [ GENERAL SETTINGS ]
 
 """"" [ APPEARANCE ]
-
-colorscheme PaperColor
+colorscheme onedark
+"colorscheme PaperColor
 set background=dark
 set colorcolumn=80  " visually set maximum width
 set cursorline  " highlight current line
 
 " make the folds look pretty with grey background
 highlight Folded guibg=black guifg=yellow
-
 """ [ / APPEARANCE ]
 
 """"" [ VIM FEATURES ]
-
 filetype plugin on
 let mapleader = "-"
 let python_highlight_all=1
@@ -114,14 +112,13 @@ au BufNewFile,BufRead *.js, *.html, *.css
     \ set tabstop=2
     \ set softtabstop=2
     \ set shiftwidth=2
-
 """ [ / VIM FEATURES ]
 
 " disable background color erase (BCE) so that color schemes
 " render properly when inside 256-color tmux and GNU screen.
-if &term =~ '256color'
-    set t_ut=
-endif
+"if &term =~ '256color'
+    "set t_ut=
+"endif
 
 """""""""""""""""""""""""""""" [ / GENERAL SETTINGS ]
 
@@ -139,16 +136,25 @@ let g:comfortable_motion_friction = 200  " default = 80
 let g:comfortable_motion_air_drag = 3.0  " default = 2.0
 """ [ / COMFORTABLE-MOTION ]
 
-""""" [ CTRLP ]
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-""" [ / CTRLP ]
-
 """"" [ DEOPLETE ]
 let g:deoplete#enable_at_startup = 1
 """ [ / DEOPLETE ]
+
+""""" [ FZF ]
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Advanced customization using autoload functions
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+""" [ / FZF ]
 
 """"" [ JEDI-VIM ]
 let g:jedi#use_splits_not_buffers = "left"
@@ -157,11 +163,13 @@ let g:jedi#popup_select_first = 0
 
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#left_alt_sep = ' '
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='onedark'
+"let g:airline_theme='gruvbox'
+" The following settings are used to get a tab navigation bar at the top
+"let g:airline#extensions#tabline#left_alt_sep = ' '
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
 """ [ / VIM-AIRLINE ]
 
 """"" [ VIM-EASYMOTION ]
@@ -173,41 +181,45 @@ nmap ç <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
-
 """ [ / VIM-EASYMOTION ]
 
 """"" [ VIM-MARKDOWN-PREVIEW ]
 let vim_markdown_preview_github=1
 let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='firefox'
+" In order to change the default browser which is Google Chrome, the following
+" command need to be entered in the terminal:
+" update-alternatives --install /usr/bin/x-www-browser x-www-browser /path/to/other-browser 100
+" If using GNOME, also this command:
+" update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /path/to/other-browser 100
 """ [ / VIM-MARKDOWN-PREVIEW ]
 
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
 
 """""""""""""""""""""""""""""""""""""""" [ MAPPINGS ]
 
-" jump to next error in ALE (with ª=previous and º=next)
-map <Char-170> <Plug>(ale_previous_wrap)
-map <Char-186> <Plug>(ale_next_wrap)
+""""" [ TERMINAL SPECIFIC ]
+" Exit from terminal buffer (Neovim) more easily (remaps Esc key in terminal)
+tnoremap <C-[> <C-\><C-n>
 
-" find word under cursor in all files in current path
-nnoremap <leader>a :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+" Open terminal buffer (Neovim)
+nnoremap <M-t> :te<CR>
 
-" find a file in current path (works well with "set path+=**")
-nnoremap <leader>G :find<space>*
+" Switch to terminal buffer automatically (when only one terminal is open)
+nnoremap <M-0> :b term://<CR>
 
-" toggle nerdtree on/off
-nnoremap <leader>N :NERDTreeToggle<CR>
+tnoremap <C-j><C-k> <C-\><C-N>
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+""" [ / TERMINAL SPECIFIC ]
 
-" press F4 to toggle highlighting on/off, and show current value.
-:noremap <F4> :set hlsearch! hlsearch?<CR>
-
-" display help in new tab
-nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
-
+""""" [ BUFFERS ]
 " open a buffer to edit Neovim configuration file
-nnoremap <leader>C :e ~/.config/nvim/init.vim<CR>
+nnoremap <leader>C :e ~/Dropbox/programming/github/better-vim-experience/init.vim<CR>
 
-" close active buffer in there are no pending changes to save
+" close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
 
 " close active buffer even if there are pending changes to save
@@ -216,28 +228,26 @@ nnoremap <leader>X :bd!<CR>
 " reset edits made in current buffer
 nnoremap <leader>e :e!<CR>
 
-" list buffers
-nnoremap <leader>b :b#<CR>
-nnoremap <leader>B :bn<CR>
+" in order: alternate, previous, next, list
+nnoremap <M-3> :b#<CR>
+nnoremap <M-1> :bp<CR>
+nnoremap <M-2> :bn<CR>
 nnoremap <leader>l :ls<CR>
 
 " shortcut to save a buffer
 nnoremap <leader>w :w!<CR>
+""" [ / BUFFERS ]
 
-" save file and regenerate ctags
-nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
-
-" close current window (closes Vim if there's only one window)
-nnoremap <leader>q :q<CR>
+""""" [ MOVEMENTS ]
+" jump to next error in ALE (with |=previous and °=next)
+map <char-124> <Plug>(ale_previous_wrap)
+map <char-176> <Plug>(ale_next_wrap)
 
 " move between windows
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" use space to toggle folds
-nnoremap <space> za
 
 " add newline without leaving normal mode and stay on current line
 nnoremap <leader>j o<Esc>
@@ -249,27 +259,54 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
+" remaps Escape key to more accessible keys in Insert mode
+inoremap jk <esc>
+""" [ / MOVEMENTS ]
+
+""""" [ SEARCH ]
+" find word under cursor in all files in current path
+nnoremap <leader>a :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+" find a file in current path (works well with "set path+=**")
+nnoremap <leader>G :find<space>*
+""" [ / SEARCH ]
+
+" toggle nerdtree on/off
+nnoremap <leader>N :NERDTreeToggle<CR>
+
+" press F4 to toggle highlighting on/off, and show current value.
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
+" display help in new tab
+nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
+
+" save file and regenerate ctags
+nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
+
+" close current window (closes Vim if there's only one window)
+nnoremap <leader>q :q<CR>
+
+" use space to toggle folds
+nnoremap <space> za
 
 """"" [ FUNCTIONS ]
-
 " remove all whitespace at the end of every line in the file.
 noremap <F5> :%s/\s\+$//<CR>:echo 'all whitespace removed.'<CR>
 
 " display text in red over column limit
-let s:activatedh = 0
-function! ToggleH()
-    if s:activatedh == 0
-        let s:activatedh = 1
-        highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-        match OverLength /\%81v.\+/
-    else
-        let s:activatedh = 0
-        match none
-    endif
-endfunction
+"let s:activatedh = 0
+"function! ToggleH()
+    "if s:activatedh == 0
+        "let s:activatedh = 1
+        "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+        "match OverLength /\%81v.\+/
+    "else
+        "let s:activatedh = 0
+        "match none
+    "endif
+"endfunction
 " Mapping to character ¬
-nnoremap <Char-172> :call ToggleH()<CR>
-
+"nnoremap <Char-172> :call ToggleH()<CR>
 """ [ / FUNCTIONS ]
 
 """""""""""""""""""""""""""""" [ / MAPPINGS ]
