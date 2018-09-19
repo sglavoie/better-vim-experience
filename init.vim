@@ -14,8 +14,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'davidhalter/jedi-vim'
 
 " design & appearance
+Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -33,9 +34,11 @@ Plug 'yuttie/comfortable-motion.vim'
 " useful features
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'machakann/vim-highlightedyank'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/SimpylFold'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 
 call plug#end()
@@ -45,8 +48,9 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""" [ GENERAL SETTINGS ]
 
 """"" [ APPEARANCE ]
-colorscheme onedark
+colorscheme gruvbox
 "colorscheme PaperColor
+"colorscheme solarized
 set background=dark
 set colorcolumn=80  " visually set maximum width
 set cursorline  " highlight current line
@@ -72,6 +76,7 @@ set shiftwidth=4  " number of spaces for indents
 set smartcase  " match uppercase in search if used in pattern, else, no
 set softtabstop=4  " number of spaces to insert when TAB is pressed
 set spell
+set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
 set spellfile=~/.config/nvim/spell/en.utf-8.add
 set splitbelow  " put new window below current one when splitting
 set splitright  " put new window to the right of the current one when splitting
@@ -107,11 +112,14 @@ set showcmd
 " visual autocomplete for command menu
 set wildmenu
 
+" multiple matches in command mode occupy more space, like in Bash 
+set wildmode=full
+
 " settings based on file type
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+"au BufNewFile,BufRead *.js, *.html, *.css
+    "\ set tabstop=2
+    "\ set softtabstop=2
+    "\ set shiftwidth=2
 """ [ / VIM FEATURES ]
 
 " disable background color erase (BCE) so that color schemes
@@ -119,6 +127,15 @@ au BufNewFile,BufRead *.js, *.html, *.css
 "if &term =~ '256color'
     "set t_ut=
 "endif
+
+""""" [ NEOVIM FEATURES ]
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" Show interactive modifications with search & replace before applying changes
+set inccommand=nosplit
+""" [ / NEOVIM FEATURES ]
+
 
 """""""""""""""""""""""""""""" [ / GENERAL SETTINGS ]
 
@@ -154,6 +171,9 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+
+" Make use of FZF command instead of CtrlP
+map <C-p> :FZF<cr>
 """ [ / FZF ]
 
 """"" [ JEDI-VIM ]
@@ -164,7 +184,6 @@ let g:jedi#popup_select_first = 0
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
 let g:airline_theme='onedark'
-"let g:airline_theme='gruvbox'
 " The following settings are used to get a tab navigation bar at the top
 "let g:airline#extensions#tabline#left_alt_sep = ' '
 "let g:airline#extensions#tabline#left_sep = ' '
@@ -249,6 +268,14 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" adjust size of current window vertically
+map <M-+> <C-w>+
+map <M--> <C-w>-
+
+" adjust size of current window horizontally
+map <M->> <C-w>>
+map <M-<> <C-w><
+
 " add newline without leaving normal mode and stay on current line
 nnoremap <leader>j o<Esc>
 nnoremap <leader>k O<Esc>
@@ -260,7 +287,7 @@ vnoremap j gj
 vnoremap k gk
 
 " remaps Escape key to more accessible keys in Insert mode
-inoremap jk <esc>
+inoremap kj <esc>
 """ [ / MOVEMENTS ]
 
 """"" [ SEARCH ]
