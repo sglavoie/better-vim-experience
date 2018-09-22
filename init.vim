@@ -63,12 +63,14 @@ highlight Folded guibg=black guifg=yellow
 filetype plugin on
 let mapleader = "-"
 let python_highlight_all=1
+set cmdwinheight=100  " open command list window in maximized state
 set encoding=utf-8
 set expandtab  " use spaces instead of tabs
 set history=1000  " command history
 set incsearch  " highlight match while typing
 set linebreak  " wrap long lines
 set mouse=a  " allows the use of the mouse
+set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
 set number  " displays absolute number of current line
 set relativenumber  " displays relative number of the lines around current one
 set scrolloff=1  " always leaves 1 line above or below the current line
@@ -76,7 +78,6 @@ set shiftwidth=4  " number of spaces for indents
 set smartcase  " match uppercase in search if used in pattern, else, no
 set softtabstop=4  " number of spaces to insert when TAB is pressed
 set spell
-set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
 set spellfile=~/.config/nvim/spell/en.utf-8.add
 set splitbelow  " put new window below current one when splitting
 set splitright  " put new window to the right of the current one when splitting
@@ -114,6 +115,14 @@ set wildmenu
 
 " multiple matches in command mode occupy more space, like in Bash 
 set wildmode=full
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 " settings based on file type
 "au BufNewFile,BufRead *.js, *.html, *.css
@@ -196,7 +205,7 @@ let g:EasyMotion_do_mapping = 1 " Disable default mappings
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{char}{label}`
-nmap ç <Plug>(easymotion-overwin-f2)
+nmap ¿ <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -240,6 +249,7 @@ nnoremap <leader>C :e ~/Dropbox/programming/github/better-vim-experience/init.vi
 
 " close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
+nnoremap <M-q> :bd<CR>
 
 " close active buffer even if there are pending changes to save
 nnoremap <leader>X :bd!<CR>
@@ -247,10 +257,12 @@ nnoremap <leader>X :bd!<CR>
 " reset edits made in current buffer
 nnoremap <leader>e :e!<CR>
 
-" in order: alternate, previous, next, list
-nnoremap <M-3> :b#<CR>
+" in order: previous, next, alternate, first, last, list
 nnoremap <M-1> :bp<CR>
 nnoremap <M-2> :bn<CR>
+nnoremap <M-3> :b#<CR>
+nnoremap <M-4> :bf<CR>
+nnoremap <M-5> :bl<CR>
 nnoremap <leader>l :ls<CR>
 
 " shortcut to save a buffer
@@ -288,6 +300,9 @@ vnoremap k gk
 
 " remaps Escape key to more accessible keys in Insert mode
 inoremap kj <esc>
+
+" allows to expand directory without filename of current open buffer
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 """ [ / MOVEMENTS ]
 
 """"" [ SEARCH ]
@@ -296,6 +311,12 @@ nnoremap <leader>a :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<C
 
 " find a file in current path (works well with "set path+=**")
 nnoremap <leader>G :find<space>*
+
+" bind K to grep word under cursor
+map <silent> <M-k> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Search with The Silver Search
+nnoremap \ :Ag<SPACE>
 """ [ / SEARCH ]
 
 " toggle nerdtree on/off
