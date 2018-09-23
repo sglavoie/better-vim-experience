@@ -113,7 +113,7 @@ set showcmd
 " visual autocomplete for command menu
 set wildmenu
 
-" multiple matches in command mode occupy more space, like in Bash 
+" multiple matches in command mode occupy more space, like in Bash
 set wildmode=full
 
 " The Silver Searcher
@@ -317,6 +317,10 @@ map <silent> <M-k> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Search with The Silver Search
 nnoremap \ :Ag<SPACE>
+
+" Start a search in normal mode (forward, backward)
+nnoremap ñ /
+nnoremap Ñ ?
 """ [ / SEARCH ]
 
 " toggle nerdtree on/off
@@ -417,9 +421,9 @@ ab wh while
 ab wi with
 ab yi yield
 
-" search for previous/next function
-nnoremap <F2> ?def <CR>
-nnoremap <F3> /def <CR>
+" search for previous/next method / function
+nnoremap <F2> [m
+nnoremap <F3> ]m
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
