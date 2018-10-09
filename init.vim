@@ -48,8 +48,8 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""" [ GENERAL SETTINGS ]
 
 """"" [ APPEARANCE ]
-colorscheme gruvbox
-"colorscheme PaperColor
+"colorscheme gruvbox
+colorscheme PaperColor
 "colorscheme solarized
 set background=dark
 set colorcolumn=80  " visually set maximum width
@@ -73,7 +73,7 @@ set mouse=a  " allows the use of the mouse
 set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
 set number  " displays absolute number of current line
 set relativenumber  " displays relative number of the lines around current one
-set scrolloff=1  " always leaves 1 line above or below the current line
+set scrolloff=2  " always leaves 2 lines above or below the current line
 set shiftwidth=4  " number of spaces for indents
 set smartcase  " match uppercase in search if used in pattern, else, no
 set softtabstop=4  " number of spaces to insert when TAB is pressed
@@ -151,15 +151,16 @@ set inccommand=nosplit
 """""""""""""""""""""""""""""""""""""""" [ PLUGINS SETTINGS ]
 
 """"" [ ALE ]
+let g:ale_fixers = ['autopep8', 'yapf']
 let g:ale_linters = {
-            \   'python': ['pycodestyle'],
+            \   'python': ['flake8', 'pylint'],
             \}
 let g:ale_completion_enabled = 1
 """ [ / ALE ]
 
 """"" [ COMFORTABLE-MOTION ]
-let g:comfortable_motion_friction = 200  " default = 80
-let g:comfortable_motion_air_drag = 3.0  " default = 2.0
+let g:comfortable_motion_friction = 150  " default = 80
+let g:comfortable_motion_air_drag = 2.5  " default = 2.0
 """ [ / COMFORTABLE-MOTION ]
 
 """"" [ DEOPLETE ]
@@ -214,7 +215,8 @@ let g:EasyMotion_smartcase = 1
 """"" [ VIM-MARKDOWN-PREVIEW ]
 let vim_markdown_preview_github=1
 let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_browser='firefox'
+let vim_markdown_preview_browser='Google Chrome'
+"let vim_markdown_preview_browser='firefox'
 " In order to change the default browser which is Google Chrome, the following
 " command need to be entered in the terminal:
 " update-alternatives --install /usr/bin/x-www-browser x-www-browser /path/to/other-browser 100
@@ -270,9 +272,9 @@ nnoremap <leader>w :w!<CR>
 """ [ / BUFFERS ]
 
 """"" [ MOVEMENTS ]
-" jump to next error in ALE (with |=previous and °=next)
-map <char-124> <Plug>(ale_previous_wrap)
-map <char-176> <Plug>(ale_next_wrap)
+" jump to next error in ALE (with |=next and °=previous)
+map <char-124> <Plug>(ale_next_wrap)
+map <char-176> <Plug>(ale_previous_wrap)
 
 " move between windows
 map <C-h> <C-w>h
@@ -420,6 +422,7 @@ ab teh the
 ab wh while
 ab wi with
 ab yi yield
+ab impotr import
 
 " search for previous/next method / function
 nnoremap <F2> ?def <CR>
