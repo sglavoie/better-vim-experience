@@ -15,7 +15,6 @@ Plug 'davidhalter/jedi-vim'
 
 " design & appearance
 Plug 'altercation/vim-colors-solarized'
-Plug 'arcticicestudio/nord-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
@@ -49,9 +48,9 @@ call plug#end()
 
 """"" [ APPEARANCE ]
 "colorscheme gruvbox
-colorscheme PaperColor
-"colorscheme solarized
 set background=dark
+"colorscheme PaperColor
+colorscheme solarized
 set colorcolumn=80  " visually set maximum width
 set cursorline  " highlight current line
 
@@ -131,12 +130,6 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
     "\ set shiftwidth=2
 """ [ / VIM FEATURES ]
 
-" disable background color erase (BCE) so that color schemes
-" render properly when inside 256-color tmux and GNU screen.
-"if &term =~ '256color'
-    "set t_ut=
-"endif
-
 """"" [ NEOVIM FEATURES ]
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -193,7 +186,8 @@ let g:jedi#popup_select_first = 0
 
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='onedark'
+let g:airline_solarized_bg='dark'
+let g:airline_theme='solarized'
 " The following settings are used to get a tab navigation bar at the top
 "let g:airline#extensions#tabline#left_alt_sep = ' '
 "let g:airline#extensions#tabline#left_sep = ' '
@@ -343,24 +337,29 @@ nnoremap <leader>q :q<CR>
 " use space to toggle folds
 nnoremap <space> za
 
+" Set language for spelling
+nnoremap <leader>Ls :set spelllang=es<CR>
+nnoremap <leader>Le :set spelllang=en<CR>
+nnoremap <leader>Lf :set spelllang=fr<CR>
+
 """"" [ FUNCTIONS ]
 " remove all whitespace at the end of every line in the file.
 noremap <F5> :%s/\s\+$//<CR>:echo 'all whitespace removed.'<CR>
 
 " display text in red over column limit
-"let s:activatedh = 0
-"function! ToggleH()
-    "if s:activatedh == 0
-        "let s:activatedh = 1
-        "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-        "match OverLength /\%81v.\+/
-    "else
-        "let s:activatedh = 0
-        "match none
-    "endif
-"endfunction
+let s:activatedh = 0
+function! ToggleH()
+    if s:activatedh == 0
+        let s:activatedh = 1
+        highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+        match OverLength /\%81v.\+/
+    else
+        let s:activatedh = 0
+        match none
+    endif
+endfunction
 " Mapping to character ¬
-"nnoremap <Char-172> :call ToggleH()<CR>
+nnoremap <Char-172> :call ToggleH()<CR>
 """ [ / FUNCTIONS ]
 
 """""""""""""""""""""""""""""" [ / MAPPINGS ]
