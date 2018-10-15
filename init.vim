@@ -302,12 +302,6 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 """ [ / MOVEMENTS ]
 
 """"" [ SEARCH ]
-" find word under cursor in all files in current path
-nnoremap <leader>a :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-" find a file in current path (works well with "set path+=**")
-nnoremap <leader>G :find<space>*
-
 " bind K to grep word under cursor
 map <silent> <M-k> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -442,15 +436,3 @@ nnoremap <F9> :%s/\(^.*\)\(# \)\(breakpoint()\)\(.*$\)/\1\3\4/ge<CR><C-O>:echo '
 
 " remove all lines where the 'breakpoint' debugging statement is found
 nnoremap <F10> :%g/^.*breakpoint().*$/d<CR><C-O>:echo 'breakpoint: REMOVED'<CR>
-
-" add set_trace() to allow for debugging
-"nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1import pdb; pdb.set_trace\(\)\r\1\2/<CR>:echo 'pdb debugging: ADDED'<CR>:let @/ = ""<CR>
-
-" comment all lines where 'pdb' is found
-"noremap <F8> :%s/\(^.*\)\(import pdb; pdb.set_trace()\)\(.*$\)/\1# \2\3/ge<CR><C-O>:echo 'pdb debugging: COMMENTED'<CR>
-
-" uncomment all lines where 'pdb' is found
-"nnoremap <F9> :%s/\(^.*\)\(# \)\(import pdb; pdb.set_trace()\)\(.*$\)/\1\3\4/ge<CR><C-O>:echo 'pdb debugging: UNCOMMENTED'<CR>
-
-" remove all lines where the 'pdb' debugging statement is found
-"nnoremap <F10> :%g/^.*import pdb; pdb.set_trace().*$/d<CR><C-O>:echo 'pdb debugging: REMOVED'<CR>
