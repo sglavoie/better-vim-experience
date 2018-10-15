@@ -65,8 +65,7 @@ let python_highlight_all=1
 set cmdwinheight=100  " open command list window in maximized state
 set encoding=utf-8
 set expandtab  " use spaces instead of tabs
-set history=1000  " command history
-set incsearch  " highlight match while typing
+set history=1000  " command history (default: 10,000)
 set linebreak  " wrap long lines
 set mouse=a  " allows the use of the mouse
 set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
@@ -96,21 +95,12 @@ set hidden
 " search regardless of case by default
 set ignorecase
 
-" always displays status line
-set laststatus=2
-
 " allows to search recursively for files with pattern matching (e.g. :find)
 set path=$PWD/**
 
 " ignores certain files/directories in current path
 set wildignore+=*.pyc,*.git*,*.db,*__pycache__*,*.png,*.jpg,*.jpeg,*.pdf
 set wildignore+=*.svg,*.xcf
-
-" show normal command being typed in bottom right corner
-set showcmd
-
-" visual autocomplete for command menu
-set wildmenu
 
 " multiple matches in command mode occupy more space, like in Bash
 set wildmode=full
