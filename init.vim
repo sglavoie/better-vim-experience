@@ -4,7 +4,7 @@
 
 """""""""""""""""""""""""""""""""""""""" [ PLUGINS ]
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin($HOME . '/.local/share/nvim/plugged')
 
 " async linting
 Plug 'w0rp/ale'
@@ -31,7 +31,7 @@ Plug 'tpope/vim-surround'
 Plug 'yuttie/comfortable-motion.vim'
 
 " useful features
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': $HOME . '/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'scrooloose/nerdcommenter'
@@ -121,6 +121,7 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 """ [ / VIM FEATURES ]
 
 """"" [ NEOVIM FEATURES ]
+let g:python3_host_prog =  $HOME . '/Programming/environments/p3.7/bin/python'
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
