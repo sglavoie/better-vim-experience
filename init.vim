@@ -11,7 +11,8 @@ Plug 'w0rp/ale'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi'
+Plug 'zchee/deoplete-jedi'
 
 " design & appearance
 Plug 'altercation/vim-colors-solarized'
@@ -53,6 +54,10 @@ set background=dark
 colorscheme solarized
 set colorcolumn=80  " visually set maximum width
 set cursorline  " highlight current line
+
+:set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 " make the folds look pretty with grey background
 highlight Folded guibg=black guifg=yellow
@@ -121,9 +126,8 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 """ [ / VIM FEATURES ]
 
 """"" [ NEOVIM FEATURES ]
-let g:python3_host_prog =  $HOME . '/Programming/environments/p3.7/bin/python'
+let g:python3_host_prog = $HOME . '/Programming/environments/neovim/bin/python' 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Show interactive modifications with search & replace before applying changes
 set inccommand=nosplit
@@ -171,8 +175,8 @@ map <C-p> :FZF<cr>
 """ [ / FZF ]
 
 """"" [ JEDI-VIM ]
-let g:jedi#use_splits_not_buffers = "left"
-let g:jedi#popup_select_first = 0
+"let g:jedi#use_splits_not_buffers = "left"
+"let g:jedi#popup_select_first = 0
 """ [ / JEDI-VIM ]
 
 """"" [ VIM-AIRLINE ]
