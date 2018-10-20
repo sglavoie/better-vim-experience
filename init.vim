@@ -258,6 +258,10 @@ nnoremap <leader>l :ls<CR>
 
 " shortcut to save a buffer
 nnoremap <leader>w :w!<CR>
+
+" redraw screen and clear highlighted search as well
+nnoremap <silent> <C-c> :<C-u>nohlsearch<CR><C-l>
+
 """ [ / BUFFERS ]
 
 """"" [ MOVEMENTS ]
