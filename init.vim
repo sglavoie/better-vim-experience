@@ -11,8 +11,6 @@ Plug 'w0rp/ale'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'davidhalter/jedi'
-Plug 'zchee/deoplete-jedi'
 
 " design & appearance
 Plug 'altercation/vim-colors-solarized'
@@ -48,19 +46,19 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""" [ GENERAL SETTINGS ]
 
 """"" [ APPEARANCE ]
-"colorscheme gruvbox
 set background=dark
 "colorscheme PaperColor
 colorscheme solarized
 set colorcolumn=80  " visually set maximum width
 set cursorline  " highlight current line
 
+" make the cursor blink in normal mode
 :set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 " make the folds look pretty with grey background
-highlight Folded guibg=black guifg=yellow
+highlight Folded ctermfg=black ctermbg=white
 """ [ / APPEARANCE ]
 
 """"" [ VIM FEATURES ]
@@ -168,7 +166,7 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Advanced customization using autoload functions
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '25%'})
 
 " Make use of FZF command instead of CtrlP
 map <C-p> :FZF<cr>
@@ -327,8 +325,11 @@ nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
 " close current window (closes Vim if there's only one window)
 nnoremap <leader>q :q<CR>
 
-" use space to toggle folds
+" use space to toggle current fold
 nnoremap <space> za
+
+" use space to toggle all folds
+nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
 
 " Set language for spelling
 nnoremap <leader>Ls :set spelllang=es<CR>
