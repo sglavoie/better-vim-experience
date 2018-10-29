@@ -191,6 +191,7 @@ Like with commenting and uncommenting, you are left at the same location in the 
 ### Add TODO/FIXME comment to the end of the line and place into insert mode
 ```vim
     map <leader>t <Esc>A  # TODO: <Esc>A
+    map <leader>f <Esc>A  # FIXME: <Esc>A
 ```
 
 
@@ -198,6 +199,7 @@ Like with commenting and uncommenting, you are left at the same location in the 
 ### Find next TODO/FIXME comment in current buffer
 ```vim
     map <leader>T <Esc>/\C# TODO: <CR>
+    map <leader>F <Esc>/\C# FIXME: <CR>
 ```
 
 
