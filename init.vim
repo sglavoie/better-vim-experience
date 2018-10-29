@@ -357,6 +357,10 @@ nnoremap <Char-172> :call ToggleH()<CR>
 " 'MakeTags' command to generate ctags in project
 command! MakeTags !ctags -R .
 
+" Clear all opening and closing tags in XML and HTML
+command! RemoveHTMLTags %s/<\_.\{-1,\}>//g
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                GIT SECTION                                   "
