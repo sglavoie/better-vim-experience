@@ -57,7 +57,7 @@ set cursorline  " highlight current line
 		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-" make the folds look pretty with grey background
+" make the folds look pretty and pretty visible
 highlight Folded ctermfg=black ctermbg=white
 """ [ / APPEARANCE ]
 
@@ -116,11 +116,6 @@ endif
 
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
-" settings based on file type
-"au BufNewFile,BufRead *.js, *.html, *.css
-    "\ set tabstop=2
-    "\ set softtabstop=2
-    "\ set shiftwidth=2
 """ [ / VIM FEATURES ]
 
 """"" [ NEOVIM FEATURES ]
@@ -172,20 +167,16 @@ inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '25%'})
 map <C-p> :FZF<cr>
 """ [ / FZF ]
 
-""""" [ JEDI-VIM ]
-"let g:jedi#use_splits_not_buffers = "left"
-"let g:jedi#popup_select_first = 0
-""" [ / JEDI-VIM ]
-
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
 let g:airline_solarized_bg='dark'
 let g:airline_theme='solarized'
+
 " The following settings are used to get a tab navigation bar at the top
-"let g:airline#extensions#tabline#left_alt_sep = ' '
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#left_alt_sep = ' '
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 """ [ / VIM-AIRLINE ]
 
 """"" [ VIM-EASYMOTION ]
@@ -243,7 +234,7 @@ nnoremap <M-q> :bd<CR>
 " close active buffer even if there are pending changes to save
 nnoremap <leader>X :bd!<CR>
 
-" reset edits made in current buffer
+" reset edits made in current buffer if file hasn't been saved
 nnoremap <leader>e :e!<CR>
 
 " in order: previous, next, alternate, first, last, list
@@ -328,7 +319,7 @@ nnoremap <leader>q :q<CR>
 " use space to toggle current fold
 nnoremap <space> za
 
-" use space to toggle all folds
+" use leader + space to toggle all folds
 nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
 
 " Set language for spelling
