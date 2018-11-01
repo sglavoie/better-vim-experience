@@ -245,6 +245,9 @@ nnoremap <M-4> :bf<CR>
 nnoremap <M-5> :bl<CR>
 nnoremap <leader>l :ls<CR>
 
+" list buffers and quickly jump to one by entering a number
+nnoremap gb :ls<CR>:b<Space>
+
 " shortcut to save a buffer
 nnoremap <leader>w :w!<CR>
 
