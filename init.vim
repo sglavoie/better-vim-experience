@@ -47,8 +47,11 @@ call plug#end()
 
 """"" [ APPEARANCE ]
 set background=dark
-"colorscheme PaperColor
-colorscheme solarized
+colorscheme PaperColor
+"colorscheme seoul256
+"colorscheme solarized
+"colorscheme tender
+"colorscheme deus
 set colorcolumn=80  " visually set maximum width
 set cursorline  " highlight current line
 
@@ -57,8 +60,8 @@ set cursorline  " highlight current line
 		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-" make the folds look pretty and pretty visible
-highlight Folded ctermfg=black ctermbg=white
+" make the folds look pretty and pretty visible, calming blue as background
+highlight Folded ctermfg=black ctermbg=031
 """ [ / APPEARANCE ]
 
 """"" [ VIM FEATURES ]
@@ -169,8 +172,7 @@ map <C-p> :FZF<cr>
 
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
-let g:airline_solarized_bg='dark'
-let g:airline_theme='solarized'
+let g:airline_theme='onedark'
 
 " The following settings are used to get a tab navigation bar at the top
 let g:airline#extensions#tabline#left_alt_sep = ' '
