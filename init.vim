@@ -250,6 +250,9 @@ nnoremap <leader>l :ls<CR>
 " list buffers and quickly jump to one by entering a number
 nnoremap gb :ls<CR>:b<Space>
 
+" open list of buffers ready for fuzzy finder
+nnoremap <leader>p :Buffers<CR>
+
 " shortcut to save a buffer
 nnoremap <leader>w :w!<CR>
 
