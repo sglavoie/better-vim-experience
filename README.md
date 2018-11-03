@@ -11,6 +11,10 @@
 
 - **[Programming in Python](#programming-in-python)**
   - [tmux integration](#tmux-integration)
+    - [Configuration file: ~/.tmux.conf](#configuration-file-tmuxconf)
+    - [Automating the launch of a default session: ~/.tmux_default_session.sh](#automating-the-launch-of-a-default-session-tmux_default_sessionsh)
+    - [Aliases to make use of .tmux_default_session.sh](#aliases-to-make-use-of-tmux_default_sessionsh)
+    - [tmux demo](#tmux-demo)
   - [Navigate to definitions and tags](#navigate-to-definitions-and-tags)
   - [Quick and effective way to use PDB (Python Debugger)](#quick-and-effective-way-to-use-pdb-python-debugger)
       - [Adding the debugging statement](#adding-the-debugging-statement)
