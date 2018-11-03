@@ -160,6 +160,9 @@ alias kdev='pkill tmux'
 alias adev='tmux attach-session -t dev'
 ```
 
+#### tmux demo
+
+![](tmux-demo.gif)
 
 ---
 ### Navigate to definitions and tags
