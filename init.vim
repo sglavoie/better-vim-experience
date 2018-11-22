@@ -13,8 +13,11 @@ Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " design & appearance
-Plug 'altercation/vim-colors-solarized'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'ajmwagar/vim-deus'
+Plug 'altercation/vim-colors-solarized'
+Plug 'jacoborus/tender.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -33,11 +36,12 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'junegunn/fzf', { 'dir': $HOME . '/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
+Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/SimpylFold'
-Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 call plug#end()
 
@@ -193,7 +197,9 @@ let g:EasyMotion_smartcase = 1
 """ [ / VIM-EASYMOTION ]
 
 """"" [ VIM-MARKDOWN-PREVIEW ]
+" Using 'grip' to preview Markdown.
 let vim_markdown_preview_github=1
+
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_browser='Google Chrome'
 "let vim_markdown_preview_browser='firefox'
@@ -226,8 +232,11 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 """ [ / TERMINAL SPECIFIC ]
 
 """"" [ BUFFERS ]
+" Make the current window the only one visible.
+nnoremap <leader>o :on<CR>
+
 " open a buffer to edit Neovim configuration file
-nnoremap <leader>C :e ~/Dropbox/programming/github/better-vim-experience/init.vim<CR>
+nnoremap <leader>C :e ~/Dropbox/programming/github/sglavoie/better-vim-experience/init.vim<CR>
 
 " close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
