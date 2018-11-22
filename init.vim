@@ -202,6 +202,10 @@ let vim_markdown_preview_github=1
 
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_browser='Google Chrome'
+
+" Remove the rendered preview.
+let vim_markdown_preview_temp_file=1
+
 "let vim_markdown_preview_browser='firefox'
 " In order to change the default browser which is Google Chrome, the following
 " command need to be entered in the terminal:
