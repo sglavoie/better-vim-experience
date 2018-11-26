@@ -17,14 +17,14 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'ajmwagar/vim-deus'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jacoborus/tender.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " language specific
-Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.vim'
 
 " moving/editing around
 Plug 'brooth/far.vim'
@@ -51,6 +51,7 @@ call plug#end()
 
 """"" [ APPEARANCE ]
 set background=dark
+"colorscheme onedark
 colorscheme PaperColor
 "colorscheme seoul256
 "colorscheme solarized
@@ -126,7 +127,7 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 """ [ / VIM FEATURES ]
 
 """"" [ NEOVIM FEATURES ]
-let g:python3_host_prog = $HOME . '/Programming/environments/neovim/bin/python' 
+let g:python3_host_prog = '/usr/local/bin/python3.7'
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " Show interactive modifications with search & replace before applying changes
@@ -195,24 +196,6 @@ nmap ¿ <Plug>(easymotion-overwin-f2)
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
 """ [ / VIM-EASYMOTION ]
-
-""""" [ VIM-MARKDOWN-PREVIEW ]
-" Using 'grip' to preview Markdown.
-let vim_markdown_preview_github=1
-
-let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_browser='Google Chrome'
-
-" Remove the rendered preview.
-let vim_markdown_preview_temp_file=1
-
-"let vim_markdown_preview_browser='firefox'
-" In order to change the default browser which is Google Chrome, the following
-" command need to be entered in the terminal:
-" update-alternatives --install /usr/bin/x-www-browser x-www-browser /path/to/other-browser 100
-" If using GNOME, also this command:
-" update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /path/to/other-browser 100
-""" [ / VIM-MARKDOWN-PREVIEW ]
 
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
 
@@ -286,7 +269,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " adjust size of current window vertically
-map <M-+> <C-w>+
+map <M-_> <C-w>+
 map <M--> <C-w>-
 
 " adjust size of current window horizontally
@@ -347,6 +330,9 @@ nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
 nnoremap <leader>Ls :set spelllang=es<CR>
 nnoremap <leader>Le :set spelllang=en<CR>
 nnoremap <leader>Lf :set spelllang=fr<CR>
+
+" Show Markdown preview in web browser
+nnoremap <C-m> :MarkdownPreview<CR>
 
 """"" [ FUNCTIONS ]
 " remove all whitespace at the end of every line in the file.
