@@ -1,6 +1,6 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""                       NEOVIM CONFIGURATION FILE                          """
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""                       NEOVIM CONFIGURATION FILE                         """
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""" [ PLUGINS ]
 
@@ -212,7 +212,9 @@ let g:highlightedyank_highlight_duration = 800
 """ [ / VIM-HIGHLIGHTEDYANK ]
 
 """"" [ VIMWIKI ]
-let g:vimwiki_list = [{'path': '~/Dropbox/university_london/notes/', 'path_html': '~/Dropbox/university_london/notes/html/', 'auto_tags': 1}]
+let g:vimwiki_list = [{'path': '~/Dropbox/university_london/notes/',
+            \ 'path_html': '~/Dropbox/university_london/notes/html/',
+            \ 'auto_tags': 1}]
 
 " 'b' for 'reBuild' ('r' is for renaming wiki page)
 nnoremap <Leader>wb :VimwikiRebuildTags<CR>
@@ -253,7 +255,8 @@ nnoremap <leader>w :on<CR>
 nnoremap <leader>b :%bd\|e#\|bd#<CR>
 
 " open a buffer to edit Neovim configuration file
-nnoremap <leader>c :e ~/Dropbox/programming/github/sglavoie/better-vim-experience/init.vim<CR>
+nnoremap <leader>c :e ~/Dropbox/programming/github/sglavoie/
+            \better-vim-experience/init.vim<CR>
 
 " close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
@@ -366,7 +369,9 @@ nnoremap <leader>Lf :set spelllang=fr<CR>
 "nnoremap <C-m> :MarkdownPreview<CR>
 
 " Add link to MathJax
-nnoremap <leader>m o<script type="text/javascript" src="/home/sglavoie/Dropbox/programming/github/others/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><Esc>
+nnoremap <leader>m o<script type="text/javascript" src="/home/sglavoie/Dropbox/
+            \programming/github/others/MathJax/MathJax.js?config=
+            \TeX-AMS-MML_HTMLorMML"></script><Esc>
 
 
 """"" [ FUNCTIONS ]
@@ -392,9 +397,9 @@ nnoremap <Char-172> :call ToggleH()<CR>
 """""""""""""""""""""""""""""" [ / MAPPINGS ]
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               CUSTOM COMMANDS                                "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              CUSTOM COMMANDS                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 'MakeTags' command to generate ctags in project
 command! MakeTags !ctags -R .
@@ -404,9 +409,9 @@ command! RemoveHTMLTags %s/<\_.\{-1,\}>//g
 
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                GIT SECTION                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               GIT SECTION                                   "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " add git capability to the status line with vim-fugitive
 set statusline+=%{fugitive#statusline()}
@@ -418,9 +423,9 @@ nnoremap <leader>s :Gstatus<CR>
 nnoremap <leader>D :Gdiff<CR>
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              PYTHONIC SECTION                                "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             PYTHONIC SECTION                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " display python help for word under cursor
 nnoremap <F12> :<C-u>execute "!pydoc3 " . expand("<cword>")<CR>
@@ -458,18 +463,21 @@ ab impotr import
 nnoremap <F2> ?def <CR>
 nnoremap <F3> /def <CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              DEBUGGING MAPPINGS                              "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             DEBUGGING MAPPINGS                              "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " add breakpoint() to allow for debugging
-nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1breakpoint\(\)\r\1\2/<CR>:echo 'breakpoint: ADDED'<CR>:let @/ = ""<CR>
+nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1breakpoint\(\)\r\1\2/<CR>
+            \:echo 'breakpoint: ADDED'<CR>:let @/ = ""<CR>
 
 " comment all lines where 'breakpoint' is found
-noremap <F8> :%s/\(^.*\)\(breakpoint()\)\(.*$\)/\1# \2\3/ge<CR><C-O>:echo 'breakpoint: COMMENTED'<CR>
+noremap <F8> :%s/\(^.*\)\(breakpoint()\)\(.*$\)/\1# \2\3/ge<CR><C-O>
+            \:echo 'breakpoint: COMMENTED'<CR>
 
 " uncomment all lines where 'breakpoint' is found
-nnoremap <F9> :%s/\(^.*\)\(# \)\(breakpoint()\)\(.*$\)/\1\3\4/ge<CR><C-O>:echo 'breakpoint: UNCOMMENTED'<CR>
+nnoremap <F9> :%s/\(^.*\)\(# \)\(breakpoint()\)\(.*$\)/\1\3\4/ge<CR><C-O>
+            \:echo 'breakpoint: UNCOMMENTED'<CR>
 
 " remove all lines where the 'breakpoint' debugging statement is found
 nnoremap <F10> :%g/^.*breakpoint().*$/d<CR><C-O>:echo 'breakpoint: REMOVED'<CR>
