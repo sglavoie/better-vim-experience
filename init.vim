@@ -11,6 +11,7 @@ Plug 'w0rp/ale'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
 
 " design & appearance
 Plug 'NLKNguyen/papercolor-theme'
@@ -31,6 +32,9 @@ Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'yuttie/comfortable-motion.vim'
+
+" Note-taking
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 
 " useful features
 Plug 'junegunn/fzf', { 'dir': $HOME . '/.fzf', 'do': './install --all' }
@@ -71,7 +75,7 @@ highlight Folded ctermfg=black ctermbg=031
 
 """"" [ VIM FEATURES ]
 filetype plugin on
-let mapleader = "-"
+let mapleader = " "
 let python_highlight_all=1
 set cmdwinheight=100  " open command list window in maximized state
 set encoding=utf-8
@@ -154,9 +158,14 @@ let g:comfortable_motion_air_drag = 2.5  " default = 2.0
 
 """"" [ DEOPLETE ]
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3.7'
+
 """ [ / DEOPLETE ]
 
 """"" [ FZF ]
+" Allows FZF to ignore patterns in .gitignore
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
@@ -169,6 +178,7 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Advanced customization using autoload functions
+" (expand word completing window)
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '25%'})
 
 " Make use of FZF command instead of CtrlP
@@ -180,10 +190,10 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline_theme='onedark'
 
 " The following settings are used to get a tab navigation bar at the top
-let g:airline#extensions#tabline#left_alt_sep = ' '
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline#extensions#tabline#left_alt_sep = ' '
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
 """ [ / VIM-AIRLINE ]
 
 """"" [ VIM-EASYMOTION ]
@@ -196,6 +206,23 @@ nmap ¿ <Plug>(easymotion-overwin-f2)
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
 """ [ / VIM-EASYMOTION ]
+
+""""" [ VIM-HIGHLIGHTEDYANK ]
+let g:highlightedyank_highlight_duration = 800
+""" [ / VIM-HIGHLIGHTEDYANK ]
+
+""""" [ VIMWIKI ]
+let g:vimwiki_list = [{'path': '~/Dropbox/university_london/notes/', 'path_html': '~/Dropbox/university_london/notes/html/', 'auto_tags': 1}]
+
+" 'b' for 'reBuild' ('r' is for renaming wiki page)
+nnoremap <Leader>wb :VimwikiRebuildTags<CR>
+
+" 'g' for 'generate'
+nnoremap <Leader>wg :VimwikiGenerateTags<CR>
+
+" 'f' for 'find' ('s' is for selecting wiki)
+nnoremap <Leader>wf :VimwikiSearchTags<space>
+""" [ / VIMWIKI ]
 
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
 
@@ -220,10 +247,13 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 
 """"" [ BUFFERS ]
 " Make the current window the only one visible.
-nnoremap <leader>o :on<CR>
+nnoremap <leader>w :on<CR>
+
+" Remove all buffers except the active one.
+nnoremap <leader>b :%bd\|e#\|bd#<CR>
 
 " open a buffer to edit Neovim configuration file
-nnoremap <leader>C :e ~/Dropbox/programming/github/sglavoie/better-vim-experience/init.vim<CR>
+nnoremap <leader>c :e ~/Dropbox/programming/github/sglavoie/better-vim-experience/init.vim<CR>
 
 " close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
@@ -231,6 +261,7 @@ nnoremap <M-q> :bd<CR>
 
 " close active buffer even if there are pending changes to save
 nnoremap <leader>X :bd!<CR>
+nnoremap <M-Q> :bd!<CR>
 
 " reset edits made in current buffer if file hasn't been saved
 nnoremap <leader>e :e!<CR>
@@ -248,9 +279,6 @@ nnoremap gb :ls<CR>:b<Space>
 
 " open list of buffers ready for fuzzy finder
 nnoremap <leader>p :Buffers<CR>
-
-" shortcut to save a buffer
-nnoremap <leader>w :w!<CR>
 
 " redraw screen and clear highlighted search as well
 nnoremap <silent> <C-c> :<C-u>nohlsearch<CR><C-l>
@@ -306,7 +334,7 @@ nnoremap Ñ ?
 """ [ / SEARCH ]
 
 " toggle nerdtree on/off
-nnoremap <leader>N :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " press F4 to toggle highlighting on/off, and show current value.
 :noremap <F4> :set hlsearch! hlsearch?<CR>
@@ -320,8 +348,11 @@ nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
 " close current window (closes Vim if there's only one window)
 nnoremap <leader>q :q<CR>
 
+" close all buffers without saving
+nnoremap <leader>Q :qall!<CR>
+
 " use space to toggle current fold
-nnoremap <space> za
+"nnoremap <space> za
 
 " use leader + space to toggle all folds
 nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
@@ -332,7 +363,11 @@ nnoremap <leader>Le :set spelllang=en<CR>
 nnoremap <leader>Lf :set spelllang=fr<CR>
 
 " Show Markdown preview in web browser
-nnoremap <C-m> :MarkdownPreview<CR>
+"nnoremap <C-m> :MarkdownPreview<CR>
+
+" Add link to MathJax
+nnoremap <leader>m o<script type="text/javascript" src="/home/sglavoie/Dropbox/programming/github/others/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><Esc>
+
 
 """"" [ FUNCTIONS ]
 " remove all whitespace at the end of every line in the file.
