@@ -25,7 +25,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " language specific
-Plug 'iamcco/markdown-preview.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " moving/editing around
 Plug 'brooth/far.vim'
@@ -355,18 +355,15 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :qall!<CR>
 
 " use space to toggle current fold
-"nnoremap <space> za
+"nnoremap <leader><space> za
 
 " use leader + space to toggle all folds
-nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
+"nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
 
 " Set language for spelling
 nnoremap <leader>Ls :set spelllang=es<CR>
 nnoremap <leader>Le :set spelllang=en<CR>
 nnoremap <leader>Lf :set spelllang=fr<CR>
-
-" Show Markdown preview in web browser
-"nnoremap <C-m> :MarkdownPreview<CR>
 
 " Add link to MathJax
 nnoremap <leader>m o<script type="text/javascript" src="/home/sglavoie/Dropbox/
