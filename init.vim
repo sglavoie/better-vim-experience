@@ -15,14 +15,15 @@ Plug 'zchee/deoplete-jedi'
 
 " design & appearance
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'ajmwagar/vim-deus'
-Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'jacoborus/tender.vim'
-Plug 'joshdick/onedark.vim'
-Plug 'junegunn/seoul256.vim'
 Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
+Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'whatyouhide/vim-gotham'
 
 " language specific
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -55,19 +56,19 @@ call plug#end()
 
 """"" [ APPEARANCE ]
 set background=dark
-"colorscheme onedark
-colorscheme PaperColor
-"colorscheme seoul256
-"colorscheme solarized
+"colorscheme PaperColor
+"colorscheme dracula
+"colorscheme molokai
+"colorscheme one
 "colorscheme tender
-"colorscheme deus
+colorscheme gruvbox
 set colorcolumn=80  " visually set maximum width
 set cursorline  " highlight current line
 
 " make the cursor blink in normal mode
-:set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-		  \,sm:block-blinkwait175-blinkoff150-blinkon175
+":set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		  "\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		  "\,sm:block-blinkwait175-blinkoff150-blinkon175
 
 " make the folds look pretty and pretty visible, calming blue as background
 highlight Folded ctermfg=black ctermbg=031
@@ -94,6 +95,7 @@ set spell
 set spellfile=~/.config/nvim/spell/en.utf-8.add
 set splitbelow  " put new window below current one when splitting
 set splitright  " put new window to the right of the current one when splitting
+set termguicolors  " make colors look better in terminal
 set tabstop=4  " ideally, same value as 'shiftwidth'
 set textwidth=0  " number of characters in a line (0 = no limit)
 
@@ -187,7 +189,7 @@ map <C-p> :FZF<cr>
 
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='onedark'
+let g:airline_theme='gruvbox'
 
 " The following settings are used to get a tab navigation bar at the top
 "let g:airline#extensions#tabline#left_alt_sep = ' '
