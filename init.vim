@@ -130,6 +130,9 @@ endif
 
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
+" disables automatic commenting on newline (from https://lukesmith.xyz/)
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 """ [ / VIM FEATURES ]
 
 """"" [ NEOVIM FEATURES ]
@@ -313,11 +316,16 @@ map <M-<> <C-w><
 nnoremap <leader>j o<Esc>
 nnoremap <leader>k O<Esc>
 
-" moves more easily with long lines that wrap
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
+" moves more easily with long lines that wrap without compromising default
+" hjkl behavior
+nmap <Down> gj
+nmap <Up> gk
+
+" Make use of Left and Right arrow keys to move text (indents)
+nmap <Left> <<
+nmap <Right> >>
+vmap <Left> <gv
+vmap <Right> >gv
 
 " remaps Escape key to more accessible keys in Insert mode
 inoremap kj <esc>
@@ -442,6 +450,7 @@ map <leader>f <Esc>A  # FIXME: <Esc>A
 map <leader>F <Esc>/\C# FIXME: <CR>
 
 " Abbreviations
+ab ifname if __name__ == '__main__':
 ab ass assert
 ab bk break
 ab cl class
