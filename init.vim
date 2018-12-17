@@ -226,11 +226,6 @@ nnoremap <Leader>wg :VimwikiGenerateTags<CR>
 " 'f' for 'find' ('s' is for selecting wiki)
 nnoremap <Leader>wf :VimwikiSearchTags<space>
 
-let g:vimwiki_list = [{'path': '~/Dropbox/university_london/notes/',
-            \ 'path_html': '~/Dropbox/university_london/notes/html/',
-            \ 'auto_tags': 1}]
-
-
 " Registered Wikis
 let wiki_1 = {}
 let wiki_1.path = '~/Dropbox/university_london/notes/'
@@ -239,7 +234,7 @@ let wiki_1.auto_tags = 1
 
 let wiki_2 = {}
 let wiki_2.path = '~/Dropbox/notes/'
-let wiki_1.path_html = '~/Dropbox/notes/html/'
+let wiki_2.path_html = '~/Dropbox/notes/html/'
 let wiki_2.index = 'index'
 
 let g:vimwiki_list = [wiki_1, wiki_2]
