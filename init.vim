@@ -192,7 +192,7 @@ map <C-p> :FZF<cr>
 
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='papercolor'
 
 " The following settings are used to get a tab navigation bar at the top
 "let g:airline#extensions#tabline#left_alt_sep = ' '
@@ -263,7 +263,7 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 
 """"" [ BUFFERS ]
 " Make the current window the only one visible.
-nnoremap <leader>w :on<CR>
+nnoremap <leader>o :on<CR>
 
 " Remove all buffers except the active one.
 nnoremap <leader>b :%bd\|e#\|bd#<CR>
