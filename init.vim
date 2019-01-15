@@ -6,14 +6,14 @@
 
 call plug#begin($HOME . '/.local/share/nvim/plugged')
 
-" async linting
+" Async linting
 Plug 'w0rp/ale'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 
-" design & appearance
+" Design & appearance
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -25,10 +25,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'whatyouhide/vim-gotham'
 
-" language specific
+" Language specific
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
-" moving/editing around
+" Moving/editing around
 Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
@@ -37,7 +37,7 @@ Plug 'yuttie/comfortable-motion.vim'
 " Note-taking
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 
-" useful features
+" Useful features
 Plug 'junegunn/fzf', { 'dir': $HOME . '/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
@@ -62,15 +62,15 @@ set background=dark
 "colorscheme one
 "colorscheme tender
 colorscheme gruvbox
-set colorcolumn=80  " visually set maximum width
-set cursorline  " highlight current line
+set colorcolumn=80  " Visually set maximum width
+set cursorline  " Highlight current line
 
-" make the cursor blink in normal mode
+" Make the cursor blink in normal mode
 ":set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 		  "\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		  "\,sm:block-blinkwait175-blinkoff150-blinkon175
 
-" make the folds look pretty and pretty visible, calming blue as background
+" Make the folds look pretty and pretty visible, calming blue as background
 highlight Folded ctermfg=black ctermbg=031
 """ [ / APPEARANCE ]
 
@@ -78,48 +78,48 @@ highlight Folded ctermfg=black ctermbg=031
 filetype plugin on
 let mapleader = " "
 let python_highlight_all=1
-set cmdwinheight=100  " open command list window in maximized state
+set cmdwinheight=100  " Open command list window in maximized state
 set encoding=utf-8
-set expandtab  " use spaces instead of tabs
-set history=1000  " command history (default: 10,000)
-set linebreak  " wrap long lines
-set mouse=a  " allows the use of the mouse
+set expandtab  " Use spaces instead of tabs
+set history=1000  " Command history (default: 10,000)
+set linebreak  " Wrap long lines
+set mouse=a  " Allows the use of the mouse
 set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
-set number  " displays absolute number of current line
-set relativenumber  " displays relative number of the lines around current one
-set scrolloff=2  " always leaves 2 lines above or below the current line
-set shiftwidth=4  " number of spaces for indents
-set smartcase  " match uppercase in search if used in pattern, else, no
-set softtabstop=4  " number of spaces to insert when TAB is pressed
+set number  " Displays absolute number of current line
+set relativenumber  " Displays relative number of the lines around current one
+set scrolloff=2  " Always leaves 2 lines above or below the current line
+set shiftwidth=4  " Number of spaces for indents
+set smartcase  " Match uppercase in search if used in pattern, else, no
+set softtabstop=4  " Number of spaces to insert when TAB is pressed
 set spell
 set spellfile=~/.config/nvim/spell/en.utf-8.add
-set splitbelow  " put new window below current one when splitting
-set splitright  " put new window to the right of the current one when splitting
-set termguicolors  " make colors look better in terminal
-set tabstop=4  " ideally, same value as 'shiftwidth'
-set textwidth=0  " number of characters in a line (0 = no limit)
+set splitbelow  " Put new window below current one when splitting
+set splitright  " Put new window to the right of the current one when splitting
+set termguicolors  " Make colors look better in terminal
+set tabstop=4  " Ideally, same value as 'shiftwidth'
+set textwidth=0  " Number of characters in a line (0 = no limit)
 
-" use the system clipboard by default
+" Use the system clipboard by default
 set clipboard=unnamedplus
 
-" enable folding of blocks of code
+" Enable folding of blocks of code
 set foldlevel=99
 
-" allows to switch to other buffers without raising error
-" when the current buffer remains unsaved
+" Allows to switch to other buffers without raising error
+" When the current buffer remains unsaved
 set hidden
 
-" search regardless of case by default
+" Search regardless of case by default
 set ignorecase
 
-" allows to search recursively for files with pattern matching (e.g. :find)
+" Allows to search recursively for files with pattern matching (e.g. :find)
 set path=$PWD/**
 
-" ignores certain files/directories in current path
+" Ignores certain files/directories in current path
 set wildignore+=*.pyc,*.git*,*.db,*__pycache__*,*.png,*.jpg,*.jpeg,*.pdf
 set wildignore+=*.svg,*.xcf
 
-" multiple matches in command mode occupy more space, like in Bash
+" Multiple matches in command mode occupy more space, like in Bash
 set wildmode=full
 
 " The Silver Searcher
@@ -130,7 +130,7 @@ endif
 
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
-" disables automatic commenting on newline (from https://lukesmith.xyz/)
+" Disables automatic commenting on newline (from https://lukesmith.xyz/)
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 """ [ / VIM FEATURES ]
@@ -157,8 +157,8 @@ let g:ale_completion_enabled = 1
 """ [ / ALE ]
 
 """"" [ COMFORTABLE-MOTION ]
-let g:comfortable_motion_friction = 150  " default = 80
-let g:comfortable_motion_air_drag = 2.5  " default = 2.0
+let g:comfortable_motion_friction = 150  " Default = 80
+let g:comfortable_motion_air_drag = 2.5  " Default = 2.0
 """ [ / COMFORTABLE-MOTION ]
 
 """"" [ DEOPLETE ]
@@ -262,28 +262,31 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 """ [ / TERMINAL SPECIFIC ]
 
 """"" [ BUFFERS ]
-" Make the current window the only one visible.
+" Make the current window the only one visible
 nnoremap <leader>o :on<CR>
+
+" Save the current buffer
+nnoremap <leader>w :write<CR>
 
 " Remove all buffers except the active one.
 nnoremap <leader>b :%bd\|e#\|bd#<CR>
 
-" open a buffer to edit Neovim configuration file
+" Open a buffer to edit Neovim configuration file
 nnoremap <leader>c :e ~/Dropbox/programming/github/sglavoie/
             \better-vim-experience/init.vim<CR>
 
-" close active buffer if there are no pending changes to save
+" Close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
 nnoremap <M-q> :bd<CR>
 
-" close active buffer even if there are pending changes to save
+" Close active buffer even if there are pending changes to save
 nnoremap <leader>X :bd!<CR>
 nnoremap <M-Q> :bd!<CR>
 
-" reset edits made in current buffer if file hasn't been saved
+" Reset edits made in current buffer if file hasn't been saved
 nnoremap <leader>e :e!<CR>
 
-" in order: previous, next, alternate, first, last, list
+" In order: previous, next, alternate, first, last, list
 nnoremap <M-1> :bp<CR>
 nnoremap <M-2> :bn<CR>
 nnoremap <M-3> :b#<CR>
@@ -291,41 +294,41 @@ nnoremap <M-4> :bf<CR>
 nnoremap <M-5> :bl<CR>
 nnoremap <leader>l :ls<CR>
 
-" list buffers and quickly jump to one by entering a number
+" List buffers and quickly jump to one by entering a number
 nnoremap gb :ls<CR>:b<Space>
 
-" open list of buffers ready for fuzzy finder
+" Open list of buffers ready for fuzzy finder
 nnoremap <leader>p :Buffers<CR>
 
-" redraw screen and clear highlighted search as well
+" Redraw screen and clear highlighted search as well
 nnoremap <silent> <C-c> :<C-u>nohlsearch<CR><C-l>
 
 """ [ / BUFFERS ]
 
 """"" [ MOVEMENTS ]
-" jump to next error in ALE (with |=next and °=previous)
+" Jump to next error in ALE (with |=next and °=previous)
 map <char-124> <Plug>(ale_next_wrap)
 map <char-176> <Plug>(ale_previous_wrap)
 
-" move between windows
+" Move between windows
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" adjust size of current window vertically
+" Adjust size of current window vertically
 map <M-_> <C-w>+
 map <M--> <C-w>-
 
-" adjust size of current window horizontally
+" Adjust size of current window horizontally
 map <M->> <C-w>>
 map <M-<> <C-w><
 
-" add newline without leaving normal mode and stay on current line
+" Add newline without leaving normal mode and stay on current line
 nnoremap <leader>j o<Esc>
 nnoremap <leader>k O<Esc>
 
-" moves more easily with long lines that wrap without compromising default
+" Moves more easily with long lines that wrap without compromising default
 " hjkl behavior
 nmap <Down> gj
 nmap <Up> gk
@@ -336,15 +339,15 @@ nmap <Right> >>
 vmap <Left> <gv
 vmap <Right> >gv
 
-" remaps Escape key to more accessible keys in Insert mode
+" Remaps Escape key to more accessible keys in Insert mode
 inoremap kj <esc>
 
-" allows to expand directory without filename of current open buffer
+" Allows to expand directory without filename of current open buffer
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 """ [ / MOVEMENTS ]
 
 """"" [ SEARCH ]
-" bind K to grep word under cursor
+" Bind K to grep word under cursor
 map <silent> <M-k> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Search with The Silver Search
@@ -355,28 +358,28 @@ nnoremap ñ /
 nnoremap Ñ ?
 """ [ / SEARCH ]
 
-" toggle nerdtree on/off
+" Toggle nerdtree on/off
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-" press F4 to toggle highlighting on/off, and show current value.
+" Press F4 to toggle highlighting on/off, and show current value.
 :noremap <F4> :set hlsearch! hlsearch?<CR>
 
-" display help in new tab
+" Display help in new tab
 nnoremap <leader>h :tabnew<CR>:help<CR><C-w><C-w>:quit<CR>
 
-" save file and regenerate ctags
+" Save file and regenerate ctags
 nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
 
-" close current window (closes Vim if there's only one window)
+" Close current window (closes Vim if there's only one window)
 nnoremap <leader>q :q<CR>
 
-" close all buffers without saving
+" Close all buffers without saving
 nnoremap <leader>Q :qall!<CR>
 
-" use space to toggle current fold
+" Use space to toggle current fold
 "nnoremap <leader><space> za
 
-" use leader + space to toggle all folds
+" Use leader + space to toggle all folds
 "nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
 
 " Set language for spelling
@@ -391,10 +394,10 @@ nnoremap <leader>m o<script type="text/javascript" src="/home/sglavoie/Dropbox/
 
 
 """"" [ FUNCTIONS ]
-" remove all whitespace at the end of every line in the file.
+" Remove all whitespace at the end of every line in the file.
 noremap <F5> :%s/\s\+$//<CR>:echo 'all whitespace removed.'<CR>
 
-" display text in red over column limit
+" Display text in red over column limit
 let s:activatedh = 0
 function! ToggleH()
     if s:activatedh == 0
@@ -429,13 +432,13 @@ command! RemoveHTMLTags %s/<\_.\{-1,\}>//g
 "                               GIT SECTION                                   "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" add git capability to the status line with vim-fugitive
+" Add git capability to the status line with vim-fugitive
 set statusline+=%{fugitive#statusline()}
 
-" git status when appropriate
+" Git status when appropriate
 nnoremap <leader>s :Gstatus<CR>
 
-" git diff when appropriate
+" Git diff when appropriate
 nnoremap <leader>D :Gdiff<CR>
 
 
@@ -443,19 +446,19 @@ nnoremap <leader>D :Gdiff<CR>
 "                             PYTHONIC SECTION                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" display python help for word under cursor
+" Display python help for word under cursor
 nnoremap <F12> :<C-u>execute "!pydoc3 " . expand("<cword>")<CR>
 
-" add TODO comment to the end of the line and place into insert mode
+" Add TODO comment to the end of the line and place into insert mode
 map <leader>t <Esc>A  # TODO: <Esc>A
 
-" find next TODO comment in current file
+" Find next TODO comment in current file
 map <leader>T <Esc>/\C# TODO: <CR>
 
-" add FIXME comment to the end of the line and place into insert mode
+" Add FIXME comment to the end of the line and place into insert mode
 map <leader>f <Esc>A  # FIXME: <Esc>A
 
-" find next FIXME comment in current file
+" Find next FIXME comment in current file
 map <leader>F <Esc>/\C# FIXME: <CR>
 
 " Abbreviations
@@ -476,7 +479,7 @@ ab wi with
 ab yi yield
 ab impotr import
 
-" search for previous/next method / function
+" Search for previous/next method / function
 nnoremap <F2> ?def <CR>
 nnoremap <F3> /def <CR>
 
@@ -484,17 +487,17 @@ nnoremap <F3> /def <CR>
 "                             DEBUGGING MAPPINGS                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" add breakpoint() to allow for debugging
+" Add breakpoint() to allow for debugging
 nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1breakpoint\(\)\r\1\2/<CR>
             \:echo 'breakpoint: ADDED'<CR>:let @/ = ""<CR>
 
-" comment all lines where 'breakpoint' is found
+" Comment all lines where 'breakpoint' is found
 noremap <F8> :%s/\(^.*\)\(breakpoint()\)\(.*$\)/\1# \2\3/ge<CR><C-O>
             \:echo 'breakpoint: COMMENTED'<CR>
 
-" uncomment all lines where 'breakpoint' is found
+" Uncomment all lines where 'breakpoint' is found
 nnoremap <F9> :%s/\(^.*\)\(# \)\(breakpoint()\)\(.*$\)/\1\3\4/ge<CR><C-O>
             \:echo 'breakpoint: UNCOMMENTED'<CR>
 
-" remove all lines where the 'breakpoint' debugging statement is found
+" Remove all lines where the 'breakpoint' debugging statement is found
 nnoremap <F10> :%g/^.*breakpoint().*$/d<CR><C-O>:echo 'breakpoint: REMOVED'<CR>
