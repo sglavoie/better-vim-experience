@@ -15,23 +15,20 @@ Plug 'zchee/deoplete-jedi'
 
 " Design & appearance
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'jacoborus/tender.vim'
 Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-one'
 Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'whatyouhide/vim-gotham'
 
 " Language specific
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Moving/editing around
-Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'yuttie/comfortable-motion.vim'
 
 " Note-taking
@@ -42,8 +39,6 @@ Plug 'junegunn/fzf', { 'dir': $HOME . '/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mattn/emmet-vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -55,39 +50,40 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""" [ GENERAL SETTINGS ]
 
 """"" [ APPEARANCE ]
-set background=dark
+"set background=dark
 "colorscheme PaperColor
 "colorscheme dracula
 "colorscheme molokai
 "colorscheme one
 "colorscheme tender
-colorscheme gruvbox
-set colorcolumn=80  " Visually set maximum width
-set cursorline  " Highlight current line
+"colorscheme gruvbox
+"set colorcolumn=80  " Visually set maximum width
+"set cursorline  " Highlight current line
 
-" Make the cursor blink in normal mode
-":set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-		  "\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-		  "\,sm:block-blinkwait175-blinkoff150-blinkon175
-
-" Make the folds look pretty and pretty visible, calming blue as background
-highlight Folded ctermfg=black ctermbg=031
+" Set colors for omni completion box
+highlight PmenuSel ctermfg=black guifg=black ctermbg=yellow guibg=yellow
+highlight Pmenu ctermfg=black guifg=black ctermbg=white guibg=white
 """ [ / APPEARANCE ]
 
 """"" [ VIM FEATURES ]
 filetype plugin on
 let mapleader = " "
 let python_highlight_all=1
+set autowrite  " Automatically :write before running commands
 set cmdwinheight=100  " Open command list window in maximized state
+set diffopt+=vertical  " Always use vertical diffs
 set encoding=utf-8
 set expandtab  " Use spaces instead of tabs
-set history=1000  " Command history (default: 10,000)
+set history=100  " Command history (default: 10,000)
+set lazyredraw  " Don't redraw screen when running macros
 set linebreak  " Wrap long lines
-set mouse=a  " Allows the use of the mouse
+set list listchars=tab:»·,trail:·,nbsp:·
+set nojoinspaces  " Use one space, not two, after punctuation
+set noswapfile
 set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
 set number  " Displays absolute number of current line
 set relativenumber  " Displays relative number of the lines around current one
-set scrolloff=2  " Always leaves 2 lines above or below the current line
+set scrolloff=1  " Always leaves 1 line above or below the current line
 set shiftwidth=4  " Number of spaces for indents
 set smartcase  " Match uppercase in search if used in pattern, else, no
 set softtabstop=4  " Number of spaces to insert when TAB is pressed
@@ -268,11 +264,14 @@ nnoremap <leader>o :on<CR>
 " Save the current buffer
 nnoremap <leader>w :write<CR>
 
+" Copy the content of the entire buffer
+nnoremap <leader>y :%y<CR>
+
 " Remove all buffers except the active one.
 nnoremap <leader>b :%bd\|e#\|bd#<CR>
 
-" Open a buffer to edit Neovim configuration file
-nnoremap <leader>c :e ~/Dropbox/programming/github/sglavoie/
+" Edit Neovim configuration file in a new tab
+nnoremap <leader>c :tabedit ~/Dropbox/programming/github/sglavoie/
             \better-vim-experience/init.vim<CR>
 
 " Close active buffer if there are no pending changes to save
@@ -358,9 +357,6 @@ nnoremap ñ /
 nnoremap Ñ ?
 """ [ / SEARCH ]
 
-" Toggle nerdtree on/off
-nnoremap <leader>n :NERDTreeToggle<CR>
-
 " Press F4 to toggle highlighting on/off, and show current value.
 :noremap <F4> :set hlsearch! hlsearch?<CR>
 
@@ -411,9 +407,25 @@ function! ToggleH()
 endfunction
 " Mapping to character ¬
 nnoremap <Char-172> :call ToggleH()<CR>
+call ToggleH()
+
 """ [ / FUNCTIONS ]
 
 """""""""""""""""""""""""""""" [ / MAPPINGS ]
+
+"""""""""""""""""""""""""""""""""""""""" [ AUTO EVENTS ]
+
+" Source: https://github.com/thoughtbot/dotfiles/blob/master/vimrc
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it for commit messages, when the position is invalid, or when
+" inside an event handler (happens when dropping a file on gvim).
+autocmd BufReadPost *
+\ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+\   exe "normal g`\"" |
+\ endif
+
+"""""""""""""""""""""""""""""" [ / AUTO EVENTS ]
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
