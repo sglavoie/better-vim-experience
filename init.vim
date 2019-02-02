@@ -52,22 +52,21 @@ call plug#end()
 """"" [ APPEARANCE ]
 "set background=dark
 "colorscheme PaperColor
-"colorscheme dracula
 "colorscheme molokai
-"colorscheme one
-"colorscheme tender
 "colorscheme gruvbox
 "set colorcolumn=80  " Visually set maximum width
 "set cursorline  " Highlight current line
 
-" Set colors for omni completion box
+" Set colors for omni completion box with default theme
 highlight PmenuSel ctermfg=black guifg=black ctermbg=yellow guibg=yellow
 highlight Pmenu ctermfg=black guifg=black ctermbg=white guibg=white
 """ [ / APPEARANCE ]
 
 """"" [ VIM FEATURES ]
-filetype plugin on
+" Set map leader as a space
 let mapleader = " "
+
+filetype plugin on
 let python_highlight_all=1
 set autowrite  " Automatically :write before running commands
 set cmdwinheight=100  " Open command list window in maximized state
