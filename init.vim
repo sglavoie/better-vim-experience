@@ -270,8 +270,7 @@ nnoremap <leader>y :%y<CR>
 nnoremap <leader>b :%bd\|e#\|bd#<CR>
 
 " Edit Neovim configuration file in a new tab
-nnoremap <leader>c :tabedit ~/Dropbox/programming/github/sglavoie/
-            \better-vim-experience/init.vim<CR>
+nnoremap <leader>c :tabedit ~/.config/nvim/init.vim
 
 " Close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
