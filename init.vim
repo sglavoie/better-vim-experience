@@ -50,16 +50,22 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""" [ GENERAL SETTINGS ]
 
 """"" [ APPEARANCE ]
-"set background=dark
+set background=dark
 "colorscheme PaperColor
-"colorscheme molokai
+colorscheme molokai
 "colorscheme gruvbox
 "set colorcolumn=80  " Visually set maximum width
-"set cursorline  " Highlight current line
+set cursorline  " Highlight current line
 
 " Set colors for omni completion box with default theme
-highlight PmenuSel ctermfg=black guifg=black ctermbg=yellow guibg=yellow
-highlight Pmenu ctermfg=black guifg=black ctermbg=white guibg=white
+" highlight PmenuSel ctermfg=black guifg=black ctermbg=yellow guibg=yellow gui=bold
+" highlight Pmenu ctermfg=black guifg=black ctermbg=white guibg=white
+
+" Set color for searched term
+" highlight Search cterm=NONE ctermfg=white guifg=white ctermbg=blue guibg=blue gui=bold
+
+"Set color for matching brackets
+" highlight MatchParen cterm=bold ctermfg=white guifg=white ctermbg=magenta guibg=magenta gui=bold
 """ [ / APPEARANCE ]
 
 """"" [ VIM FEATURES ]
@@ -187,7 +193,7 @@ map <C-p> :FZF<cr>
 
 """"" [ VIM-AIRLINE ]
 let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='papercolor'
+let g:airline_theme='cobalt2'
 
 " The following settings are used to get a tab navigation bar at the top
 "let g:airline#extensions#tabline#left_alt_sep = ' '
@@ -223,8 +229,8 @@ nnoremap <Leader>wf :VimwikiSearchTags<space>
 
 " Registered Wikis
 let wiki_1 = {}
-let wiki_1.path = '~/Dropbox/university_london/notes/'
-let wiki_1.path_html = '~/Dropbox/university_london/notes/html/'
+let wiki_1.path = '~/Dropbox/university/notes/'
+let wiki_1.path_html = '~/Dropbox/university/notes/html/'
 let wiki_1.auto_tags = 1
 
 let wiki_2 = {}
@@ -232,7 +238,12 @@ let wiki_2.path = '~/Dropbox/notes/'
 let wiki_2.path_html = '~/Dropbox/notes/html/'
 let wiki_2.index = 'index'
 
-let g:vimwiki_list = [wiki_1, wiki_2]
+let wiki_3 = {}
+let wiki_3.path = '~/Dropbox/university/notes/degree/level4/mathemathics_for_CS/'
+let wiki_3.path_html = '~/Dropbox/university/notes/degree/level4/mathemathics_for_CS/html/'
+let wiki_3.index = 'index'
+
+let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
 """ [ / VIMWIKI ]
 
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
@@ -270,7 +281,7 @@ nnoremap <leader>y :%y<CR>
 nnoremap <leader>b :%bd\|e#\|bd#<CR>
 
 " Edit Neovim configuration file in a new tab
-nnoremap <leader>c :tabedit ~/.config/nvim/init.vim
+nnoremap <leader>c :tabedit ~/.dotfiles/config/nvim/init.vim
 
 " Close active buffer if there are no pending changes to save
 nnoremap <leader>x :bd<CR>
