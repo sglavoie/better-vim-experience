@@ -21,7 +21,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Language specific
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
 " Moving/editing around
 Plug 'easymotion/vim-easymotion'
@@ -51,10 +51,10 @@ call plug#end()
 
 """"" [ APPEARANCE ]
 set background=dark
-"colorscheme PaperColor
 colorscheme molokai
-"colorscheme gruvbox
-"set colorcolumn=80  " Visually set maximum width
+" colorscheme PaperColor
+" colorscheme gruvbox
+" set colorcolumn=80  " Visually set maximum width
 set cursorline  " Highlight current line
 
 " Set colors for omni completion box with default theme
@@ -88,7 +88,7 @@ set noswapfile
 set nrformats=  " <C-a>/<C-x> with leading zeros → decimal instead of octal
 set number  " Displays absolute number of current line
 set relativenumber  " Displays relative number of the lines around current one
-set scrolloff=1  " Always leaves 1 line above or below the current line
+set scrolloff=2  " Always leaves 2 lines above or below the current line
 set shiftwidth=4  " Number of spaces for indents
 set smartcase  " Match uppercase in search if used in pattern, else, no
 set softtabstop=4  " Number of spaces to insert when TAB is pressed
@@ -117,7 +117,7 @@ set ignorecase
 set path=$PWD/**
 
 " Ignores certain files/directories in current path
-set wildignore+=*.pyc,*.git*,*.db,*__pycache__*,*.png,*.jpg,*.jpeg,*.pdf
+set wildignore+=*.pyc,*.db,*__pycache__*,*.png,*.jpg,*.jpeg,*.pdf
 set wildignore+=*.svg,*.xcf
 
 " Multiple matches in command mode occupy more space, like in Bash
@@ -185,7 +185,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Advanced customization using autoload functions
 " (expand word completing window)
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '25%'})
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '20%'})
 
 " Make use of FZF command instead of CtrlP
 map <C-p> :FZF<cr>
@@ -214,7 +214,7 @@ let g:EasyMotion_smartcase = 1
 """ [ / VIM-EASYMOTION ]
 
 """"" [ VIM-HIGHLIGHTEDYANK ]
-let g:highlightedyank_highlight_duration = 800
+let g:highlightedyank_highlight_duration = 500
 """ [ / VIM-HIGHLIGHTEDYANK ]
 
 """"" [ VIMWIKI ]
@@ -243,7 +243,18 @@ let wiki_3.path = '~/Dropbox/university/notes/degree/level4/mathemathics_for_CS/
 let wiki_3.path_html = '~/Dropbox/university/notes/degree/level4/mathemathics_for_CS/html/'
 let wiki_3.index = 'index'
 
-let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
+let wiki_4 = {}
+let wiki_4.path = '~/Dropbox/university/notes/degree/level4/web_development/'
+let wiki_4.path_html = '~/Dropbox/university/notes/degree/level4/web_development/html/'
+let wiki_4.index = 'index'
+
+let wiki_5 = {}
+let wiki_5.path = '~/Dropbox/university/notes/degree/level4/introduction_to_programming_i/'
+let wiki_5.path_html = '~/Dropbox/university/notes/degree/level4/introduction_to_programming_i/html/'
+let wiki_5.index = 'index'
+
+
+let g:vimwiki_list = [wiki_1, wiki_2, wiki_3, wiki_4, wiki_5]
 """ [ / VIMWIKI ]
 
 """""""""""""""""""""""""""""" [ / PLUGINS SETTINGS ]
@@ -341,9 +352,11 @@ nnoremap <leader>k O<Esc>
 nmap <Down> gj
 nmap <Up> gk
 
-" Make use of Left and Right arrow keys to move text (indents)
-nmap <Left> <<
-nmap <Right> >>
+" Quickly navigate open tabs
+nmap <Left> gT
+nmap <Right> gt
+
+" Make use of Left and Right arrow keys to move text (indents) in Visual mode
 vmap <Left> <gv
 vmap <Right> >gv
 
@@ -380,12 +393,6 @@ nnoremap <leader>q :q<CR>
 
 " Close all buffers without saving
 nnoremap <leader>Q :qall!<CR>
-
-" Use space to toggle current fold
-"nnoremap <leader><space> za
-
-" Use leader + space to toggle all folds
-"nnoremap <expr> <leader><space> &foldlevel ? 'zM' :'zR'
 
 " Set language for spelling
 nnoremap <leader>Ls :set spelllang=es<CR>
@@ -460,7 +467,7 @@ set statusline+=%{fugitive#statusline()}
 nnoremap <leader>s :Gstatus<CR>
 
 " Git diff when appropriate
-nnoremap <leader>D :Gdiff<CR>
+nnoremap <leader>dd :Gdiff<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
