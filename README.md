@@ -4,38 +4,46 @@
 
 ## Table of Contents
 
-- **[General Tips And Tricks](#general-tips-and-tricks)**
-  - [Display the main help buffer in a new tab](#display-the-main-help-buffer-in-a-new-tab)
-  - [Remove all whitespace at the end of every line in the buffer](#remove-all-whitespace-at-the-end-of-every-line-in-the-buffer)
-  - [Access command mode more easily by swapping colon with semi-colon](#access-command-mode-more-easily-by-swapping-colon-with-semi-colon)
-  - [Add newline without leaving normal mode and stay on current line](#add-newline-without-leaving-normal-mode-and-stay-on-current-line)
-  - [Completions with Ctrl+x (eXpand)](#completions-with-ctrlx-expand)
+<!-- vim-markdown-toc GFM -->
 
-- **[Programming in Python](#programming-in-python)**
-  - [tmux integration](#tmux-integration)
-    - [Configuration file: ~/.tmux.conf](#configuration-file-tmuxconf)
-    - [Automating the launch of a default session: ~/.tmux_default_session.sh](#automating-the-launch-of-a-default-session-tmux_default_sessionsh)
-    - [Aliases to make use of .tmux_default_session.sh](#aliases-to-make-use-of-tmux_default_sessionsh)
-    - [tmux demo](#tmux-demo)
-  - [Navigate to definitions and tags](#navigate-to-definitions-and-tags)
-  - [Quick and effective way to use PDB (Python Debugger)](#quick-and-effective-way-to-use-pdb-python-debugger)
-      - [Adding the debugging statement](#adding-the-debugging-statement)
-      - [Commenting all the lines where the debugging statement is found](#commenting-all-the-lines-where-the-debugging-statement-is-found)
-      - [Uncommenting all the lines where the debugging statement is found](#uncommenting-all-the-lines-where-the-debugging-statement-is-found)
-      - [Removing all traces of pdb.set_trace()](#removing-all-traces-of-pdbset_trace)
-  - [Add TODO/FIXME comment to the end of the line and place into insert mode](#add-todofixme-comment-to-the-end-of-the-line-and-place-into-insert-mode)
-  - [Find next TODO/FIXME comment in current buffer](#find-next-todofixme-comment-in-current-buffer)
-  - [Simple abbreviations for the main Python keywords](#simple-abbreviations-for-the-main-python-keywords)
-  - [Search for previous/next function](#search-for-previousnext-function)
-  - [Display text in red over column limit](#display-text-in-red-over-column-limit)
-  - [Display Python help for word under cursor](#display-python-help-for-word-under-cursor)
-  - [Quickly toggle all folds in current buffer](#quickly-toggle-all-folds-in-current-buffer)
+* [General Tips And Tricks](#general-tips-and-tricks)
+    * [Display the main help buffer in a new tab](#display-the-main-help-buffer-in-a-new-tab)
+    * [Remove all whitespace at the end of every line in the buffer](#remove-all-whitespace-at-the-end-of-every-line-in-the-buffer)
+    * [Access command mode more easily by swapping colon with semi-colon](#access-command-mode-more-easily-by-swapping-colon-with-semi-colon)
+    * [Add newline without leaving normal mode and stay on current line](#add-newline-without-leaving-normal-mode-and-stay-on-current-line)
+    * [Completions with Ctrl+x (eXpand)](#completions-with-ctrlx-expand)
+* [Programming in Python](#programming-in-python)
+    * [tmux integration](#tmux-integration)
+        * [Configuration file: ~/.tmux.conf](#configuration-file-tmuxconf)
+        * [Automating the launch of a default session: ~/.tmux_default_session.sh](#automating-the-launch-of-a-default-session-tmux_default_sessionsh)
+        * [Aliases to make use of .tmux_default_session.sh](#aliases-to-make-use-of-tmux_default_sessionsh)
+        * [tmux demo](#tmux-demo)
+    * [Navigate to definitions and tags](#navigate-to-definitions-and-tags)
+        * [Navigate inside the current buffer](#navigate-inside-the-current-buffer)
+        * [Navigate inside all buffers within the current project](#navigate-inside-all-buffers-within-the-current-project)
+    * [Quick and effective way to use PDB (Python Debugger)](#quick-and-effective-way-to-use-pdb-python-debugger)
+        * [Adding the debugging statement](#adding-the-debugging-statement)
+            * [Before Python 3.7](#before-python-37)
+            * [Python 3.7+](#python-37)
+        * [Commenting all the lines where the debugging statement is found](#commenting-all-the-lines-where-the-debugging-statement-is-found)
+        * [Uncommenting all the lines where the debugging statement is found](#uncommenting-all-the-lines-where-the-debugging-statement-is-found)
+        * [Removing all traces of pdb.set_trace()](#removing-all-traces-of-pdbset_trace)
+    * [Add TODO/FIXME comment to the end of the line and place into insert mode](#add-todofixme-comment-to-the-end-of-the-line-and-place-into-insert-mode)
+    * [Find next TODO/FIXME comment in current buffer](#find-next-todofixme-comment-in-current-buffer)
+    * [Simple abbreviations for the main Python keywords](#simple-abbreviations-for-the-main-python-keywords)
+    * [Search for previous/next function](#search-for-previousnext-function)
+    * [Display text in red over column limit](#display-text-in-red-over-column-limit)
+    * [Display Python help for word under cursor](#display-python-help-for-word-under-cursor)
+    * [Quickly toggle all folds in current buffer](#quickly-toggle-all-folds-in-current-buffer)
+
+<!-- vim-markdown-toc -->
+
+---
 
 ## General Tips And Tricks
 
 This is obviously far from being an exhaustive list, but those are some tips and tricks that I find really useful on a daily basis.
 
----
 ### Display the main help buffer in a new tab
 
 ```vim
@@ -44,8 +52,6 @@ This is obviously far from being an exhaustive list, but those are some tips and
 ```
 This is useful to maximize the help window and read more easily. You can quickly switch back to the next tab with the keystrokes `gt` (especially useful if you don't have any other tab opened). Simply do `:q` on the help tab and you're back to work! 
 
-
----
 ### Remove all whitespace at the end of every line in the buffer
 
 This also works for lines that only contain whitespace. It keeps the line in place but remove the extra space(s) or tab(s) that might have been left by accident.
@@ -53,8 +59,6 @@ This also works for lines that only contain whitespace. It keeps the line in pla
    noremap <F5> :%s/\s\+$//<CR>:echo 'all whitespace removed.'<CR>
 ```
 
-
----
 ### Access command mode more easily by swapping colon with semi-colon
 
 If you (almost) never use the key `;`, you can swap it with `:` to get to the command line more easily. You can still continue to use `;` by typing `:`.
@@ -63,7 +67,6 @@ If you (almost) never use the key `;`, you can swap it with `:` to get to the co
    nnoremap : ;
 ```
 
----
 ### Add newline without leaving normal mode and stay on current line 
 ```vim
    nnoremap <C-J> o<Esc>
@@ -77,11 +80,10 @@ Those are the combinations that I tend to use the most.
 - `Ctrl + x  Ctrl + k` will complete a word from the dictionary.
 - `Ctrl + x  Ctrl + ]` will complete a word from available tags.
 
-
+---
 
 ## Programming in Python
 
----
 ### tmux integration
 
 [tmux](https://github.com/tmux/tmux) offers many advantages in the context of remote access to another machine, but it also shines on a local setup! Here is how I currently like to set it up.
@@ -170,7 +172,6 @@ alias adev='tmux attach-session -t dev'
 
 ![](tmux-demo.gif)
 
----
 ### Navigate to definitions and tags
 
 #### Navigate inside the current buffer
@@ -205,12 +206,10 @@ To keep those tags useful when you update your project, you can map a sequence t
 nnoremap <leader>W :w<CR>:MakeTags<CR>:echo 'ctags have been updated.'<CR>
 ```
 
----
 ### Quick and effective way to use PDB (Python Debugger)
 
 I have found that using **pdb.set_trace()** is quite useful to debug a program and I now use the following mappings in Vim's configuration file to facilitate the work.
 
----
 #### Adding the debugging statement
 
 ##### Before Python 3.7
@@ -248,8 +247,6 @@ The corresponding mapping with Python 3.7+ could be something as follow:
 nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1breakpoint\(\)\r\1\2/<CR>:echo 'breakpoint: ADDED'<CR>:let @/ = ""<CR>
 ```
 
-
----
 #### Commenting all the lines where the debugging statement is found
 ```vim
    " Comment all lines where 'pdb.set_trace()' is found
@@ -260,8 +257,6 @@ nnoremap <F7> :s/\(^\s*\)\(.*$\)/\1breakpoint\(\)\r\1\2/<CR>:echo 'breakpoint: A
 ```
 This works wherever you are in the buffer and leaves you on the line where the command is executed. The only change that is being made is to add `# ` right before `import pdb; pdb.set_trace()`, keeping the indentation intact.
 
-
----
 #### Uncommenting all the lines where the debugging statement is found 
 ```vim
    " Uncomment all lines where 'pdb.set_trace()' is found
@@ -273,7 +268,6 @@ This works wherever you are in the buffer and leaves you on the line where the c
 Working just like for commenting, this mapping removes only the `# ` part before the `import` statement and keeps you where the command is being executed.
 
 
----
 #### Removing all traces of pdb.set_trace()
 ```vim
    " Remove all lines where the 'pdb.set_trace()' debugging statement is found
@@ -285,7 +279,6 @@ Working just like for commenting, this mapping removes only the `# ` part before
 Like with commenting and uncommenting, you are left at the same location in the current buffer... Now with a code hopefully at least as good as when you started debugging!
 
 
----
 ### Add TODO/FIXME comment to the end of the line and place into insert mode
 ```vim
     map <leader>t <Esc>A  # TODO: <Esc>A
@@ -293,7 +286,6 @@ Like with commenting and uncommenting, you are left at the same location in the 
 ```
 
 
----
 ### Find next TODO/FIXME comment in current buffer
 ```vim
     map <leader>T <Esc>/\C# TODO: <CR>
@@ -301,7 +293,6 @@ Like with commenting and uncommenting, you are left at the same location in the 
 ```
 
 
----
 ### Simple abbreviations for the main Python keywords
 ```vim
    " Abbreviations
@@ -328,7 +319,6 @@ Like with commenting and uncommenting, you are left at the same location in the 
    nnoremap <F3> /def <CR>
 ```
 
----
 ### Display text in red over column limit
 
 The function can easily be toggled (like shown on the last line). Here, it is set to go red from position 81 and above.
@@ -348,7 +338,6 @@ The function can easily be toggled (like shown on the last line). Here, it is se
 ```
 
 
----
 ### Display Python help for word under cursor
 ```vim
    nnoremap <buffer> <F12> :<C-u>execute "!pydoc3 " . expand("<cword>")<CR>
@@ -356,7 +345,6 @@ The function can easily be toggled (like shown on the last line). Here, it is se
 This opens a new window where you can move just like in VIM with a complete definition of the keyword you were looking for. When closing the help window, you are back exactly to where you left off.
 
 
----
 ### Quickly toggle all folds in current buffer
 
 This will greatly compact the visible length of the buffer and allows for quick movements. This will apply a toggle globally in the current buffer:
