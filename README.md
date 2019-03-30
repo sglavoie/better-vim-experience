@@ -1,5 +1,7 @@
 # Tips and tricks for [Vim](https://github.com/vim/vim) / [Neovim](https://github.com/neovim/neovim)
 
+[Link to up-to-date current Neovim configuration file](https://github.com/sglavoie/dotfiles/blob/master/config/nvim/init.vim).
+
 ## Table of Contents
 
 - **[General Tips And Tricks](#general-tips-and-tricks)**
